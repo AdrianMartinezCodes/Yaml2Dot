@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yaml2dot"
+version='0.1.0'
+description= 'Python Yaml to Dot Converter'
+requires-python= '>=3.10'
+authors = [
+  {name="Adrian Martinez", email="afmartinez1215@gmail.com"}]
+dependencies = [
+    "PyYAML",
+    "pydot",
+    "click"
+]
+[project.optional-dependencies]
+dev = [
+    "mypy",
+    "flake8",
+    "yapf",
+]
+test = [
+    "pytest",
+    "coverage",
+    "networkx"
+]
+all = [
+  "yaml2dot[dev,test]"
+]
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.coverage.run]
+omit = ["tests/*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+env_files = [".env.example"]
+testpaths = ["tests"]
+[pytest]
+pythonpath = "."
+
+[project.scripts]
+yaml2dot = "yaml2dot.__main__:render_yaml"
