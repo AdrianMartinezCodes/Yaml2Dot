@@ -55,9 +55,9 @@ Example usage:
 python __main__.py --input-file input.yaml --output-file output.dot --rankdir LR
 ```
 
-### Examples
+### Sample YAML Files
 
-You can find sample YAML files in the examples directory of this repository. Here are a few examples:
+The `examples` directory contains several sample YAML files that you can use for testing and experimentation. These files cover various YAML structures and complexities.
 
 * complex.yaml: Complex YAML structure with nested dictionaries and lists.
 * list.yaml: YAML data with a list of items.
@@ -75,7 +75,14 @@ To render a sample YAML file, use the following command:
 python __main__.py --input-file examples/small_graph.yaml --output-file small_graph.dot --rankdir LR
 ```
 This will generate a DOT file that can be visualized using Graphviz or other compatible tools.
-Contributing
+
+### Running Tests
+
+You can run tests to ensure that the conversion from YAML to DOT works correctly. Use the following command:
+```bash
+pytest
+```
+
 
 ### Contributing
 Contributions are welcome! If you'd like to contribute to this project, please follow the contribution guidelines.
