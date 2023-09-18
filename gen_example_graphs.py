@@ -1,8 +1,10 @@
 import os
-import networkx as nx
-from yaml2dot.renderer import render
-import yaml
 from pathlib import Path
+
+import networkx as nx
+import yaml
+
+from yaml2dot.renderer import render
 
 # Define the directory containing the sample YAML files
 yaml_dir = Path("examples")
