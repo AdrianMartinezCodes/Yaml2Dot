@@ -1,5 +1,6 @@
 # pythonYaml2Dot
-Python implementation of a yaml2dot converter
+Python implementation of a yaml2dot converter.
+
 Inspried by the original [yml2dot](https://github.com/lucasepe/yml2dot).
 
 The **YAML to DOT Converter** is a Python tool that allows you to convert YAML data into a graph visualization represented in the DOT (Graph Description Language) format. It utilizes NetworkX for creating the graph structure and PyDot for generating DOT files.
@@ -11,7 +12,12 @@ The **YAML to DOT Converter** is a Python tool that allows you to convert YAML d
   - [Installation](#installation)
 - [Usage](#usage)
 - [Examples](#examples)
-- [Contributing](#contributing)
+  - [Sample YAML Files](#sample-yaml-files)
+  - [Rendering Example](#rendering-example)
+- [Development](#development)
+    - [Contributing](#contributing)
+    - [Install](#dev-install)
+    - [Testing](#testing)
 - [License](#license)
 
 ## Getting Started
@@ -24,7 +30,7 @@ Before using the YAML to DOT Converter, ensure you have the following dependenci
 - [NetworkX](https://networkx.github.io/)
 - [PyDot](https://pypi.org/project/pydot/)
 - [Click](https://click.palletsprojects.com/en/8.0.x/)
-
+### Installation
 You can install NetworkX, PyDot, and Click using pip:
 
 ```bash
@@ -37,7 +43,7 @@ or you can simply clone the repository and navigate to the project directory:
 $pip install .
 ```
 
-### Usage
+## Usage
 
 To convert a YAML file to a DOT file, use the following command:
 
@@ -54,7 +60,7 @@ Example usage:
 ```bash
 python __main__.py --input-file input.yaml --output-file output.dot --rankdir LR
 ```
-
+## Examples
 ### Sample YAML Files
 
 The `examples` directory contains several sample YAML files that you can use for testing and experimentation. These files cover various YAML structures and complexities.
@@ -76,13 +82,25 @@ python __main__.py --input-file examples/small_graph.yaml --output-file small_gr
 ```
 This will generate a DOT file that can be visualized using Graphviz or other compatible tools.
 
-### Running Tests
+## Development
 
-You can run tests to ensure that the conversion from YAML to DOT works correctly. Use the following command:
+### Contributing
+Contributions are welcome! I don't have any formal contributing guidelines but since this is a fairly small project, feel free to send an informal message.
+
+
+### Dev Install
+The fastest way to start developing is to clone the repository and run the following command:
+```bash
+#pip install '.[all]'
+```
+### Testing
+
+Simply run:
 ```bash
 pytest
 ```
 
 
-### Contributing
-Contributions are welcome! If you'd like to contribute to this project, please follow the contribution guidelines.
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
