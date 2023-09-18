@@ -1,13 +1,28 @@
+from pathlib import Path
+
 import click
 import networkx as nx
-from pathlib import Path
+
 from yaml2dot.renderer import render
 from yaml2dot.yaml_loader import parse_yaml  # Import the parse_yaml function
 
+
 @click.command()
-@click.option("--input-file", type=click.File("r"), metavar="INPUT_FILE", required=True, help="Path to the input YAML file.")
-@click.option("--output-file", type=click.Path(), metavar="OUTPUT_FILE", required=True, help="Path to the output DOT file.")
-@click.option("--rankdir", type=click.Choice(['LR', 'TB']), default='LR', help="Rank direction (LR for left to right, TB for top to bottom).")
+@click.option("--input-file",
+              type=click.File("r"),
+              metavar="INPUT_FILE",
+              required=True,
+              help="Path to the input YAML file.")
+@click.option("--output-file",
+              type=click.Path(),
+              metavar="OUTPUT_FILE",
+              required=True,
+              help="Path to the output DOT file.")
+@click.option(
+    "--rankdir",
+    type=click.Choice(['LR', 'TB']),
+    default='LR',
+    help="Rank direction (LR for left to right, TB for top to bottom).")
 def render_yaml(input_file, output_file, rankdir):
     """
     Render YAML data as a graph and save it as a DOT file.
@@ -25,6 +40,7 @@ def render_yaml(input_file, output_file, rankdir):
 
     pydot_graph = nx.drawing.nx_pydot.to_pydot(nx_graph)
     pydot_graph.write_raw(output_path)
+
 
 if __name__ == "__main__":
     render_yaml()

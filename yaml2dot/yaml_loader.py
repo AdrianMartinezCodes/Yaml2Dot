@@ -1,5 +1,6 @@
 import yaml
 
+
 def parse_yaml(reader):
     try:
         parsed_yaml = yaml.safe_load(reader)

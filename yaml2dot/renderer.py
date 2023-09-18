@@ -1,8 +1,16 @@
-import networkx as nx
 from typing import Any
 
-def render_yaml_structure(data: Any, graph: nx.MultiDiGraph, node_attrs, parent_node=None, rankdir="LR"):
-    graph.graph['graph'] = {'rankdir': rankdir}  # Set the rankdir attribute for the graph
+import networkx as nx
+
+
+def render_yaml_structure(data: Any,
+                          graph: nx.MultiDiGraph,
+                          node_attrs,
+                          parent_node=None,
+                          rankdir="LR"):
+    graph.graph['graph'] = {
+        'rankdir': rankdir
+    }  # Set the rankdir attribute for the graph
 
     def add_node_and_edge(node_name, parent):
         if ":" in node_name:
@@ -19,7 +27,11 @@ def render_yaml_structure(data: Any, graph: nx.MultiDiGraph, node_attrs, parent_
                 value_str = str(value)
                 add_node_and_edge(value_str, child_node_name)
             else:
-                render_yaml_structure(value, graph, node_attrs, parent_node=child_node_name, rankdir=rankdir)
+                render_yaml_structure(value,
+                                      graph,
+                                      node_attrs,
+                                      parent_node=child_node_name,
+                                      rankdir=rankdir)
     elif isinstance(data, list):
         for item in data:
             if isinstance(item, dict):
@@ -30,10 +42,15 @@ def render_yaml_structure(data: Any, graph: nx.MultiDiGraph, node_attrs, parent_
                         value_str = str(value)
                         add_node_and_edge(value_str, child_node_name)
                     else:
-                        render_yaml_structure(value, graph, node_attrs, parent_node=child_node_name, rankdir=rankdir)
+                        render_yaml_structure(value,
+                                              graph,
+                                              node_attrs,
+                                              parent_node=child_node_name,
+                                              rankdir=rankdir)
             else:
                 child_node_name = str(item)
                 add_node_and_edge(child_node_name, parent_node)
+
 
 def render(yaml_data: Any, node_attrs=None, rankdir="LR") -> nx.MultiDiGraph:
     if node_attrs is None:

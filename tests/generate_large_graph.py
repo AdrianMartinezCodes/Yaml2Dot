@@ -1,5 +1,7 @@
-import networkx as nx
 import random
+
+import networkx as nx
+
 
 def generate_large_graph(num_nodes, random_seed=42):
     random.seed(random_seed)

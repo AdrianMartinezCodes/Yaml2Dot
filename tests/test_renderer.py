@@ -1,17 +1,24 @@
+import filecmp
+from pathlib import Path
+
 import networkx as nx
 import pytest
 import yaml
+
 from yaml2dot.renderer import render
-from pathlib import Path
-import filecmp
+
 
 # Define a fixture to load example YAML files
-@pytest.fixture(params=["complex.yaml", "list.yaml", "mixed.yaml", "nested.yaml", "simple.yaml", "small_graph.yaml", "large_graph.yaml"])
+@pytest.fixture(params=[
+    "complex.yaml", "list.yaml", "mixed.yaml", "nested.yaml", "simple.yaml",
+    "small_graph.yaml", "large_graph.yaml"
+])
 def sample_yaml_file(request):
     # Construct the full path to the example YAML file
     examples_dir = Path(__file__).resolve().parent.parent / "examples"
     yaml_file_path = examples_dir / request.param
     return str(yaml_file_path)
+
 
 # Define a fixture to get the corresponding expected DOT file
 @pytest.fixture
@@ -20,6 +27,7 @@ def expected_dot_file(sample_yaml_file):
     tests_dir = Path(__file__).resolve().parent
     expected_dot_path = tests_dir / "expected_dot_files" / f"{Path(sample_yaml_file).stem}.dot"
     return str(expected_dot_path)
+
 
 def test_render_with_example_files(sample_yaml_file, expected_dot_file):
     with open(sample_yaml_file, "r") as yaml_file:
