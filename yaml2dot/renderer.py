@@ -1,18 +1,39 @@
-from typing import Any
-
+from typing import Any, Dict, List
 import networkx as nx
 
-
-def render_yaml_structure(data: Any,
+def render_yaml_structure(data: Dict[str, Any],
                           graph: nx.MultiDiGraph,
-                          node_attrs,
-                          parent_node=None,
-                          rankdir="LR"):
+                          node_attrs: Dict[str, Any],
+                          parent_node: str = None,
+                          rankdir: str = "LR") -> None:
+    """
+    Renders a Python dictionary structure into a directed graph using NetworkX.
+
+    Parameters:
+    - data (Dict[str, Any]): The Python dictionary to render.
+    - graph (nx.MultiDiGraph): The NetworkX MultiDiGraph to render the data into.
+    - node_attrs (Dict[str, Any]): A dictionary of attributes to apply to each node in the graph.
+    - parent_node (str, optional): The parent node's name. Defaults to None.
+    - rankdir (str, optional): The direction of the graph layout. Defaults to "LR" (left to right).
+
+    Returns:
+    - None
+    """
     graph.graph['graph'] = {
         'rankdir': rankdir
-    }  # Set the rankdir attribute for the graph
+    }
 
-    def add_node_and_edge(node_name, parent):
+    def add_node_and_edge(node_name: str, parent: str) -> None:
+        """
+        Adds a node and an edge to the graph.
+
+        Parameters:
+        - node_name (str): The name of the node to add.
+        - parent (str): The name of the parent node.
+
+        Returns:
+        - None
+        """
         if ":" in node_name:
             node_name = f'"{node_name}"'
         graph.add_node(node_name, label=node_name, **node_attrs)
@@ -51,8 +72,19 @@ def render_yaml_structure(data: Any,
                 child_node_name = str(item)
                 add_node_and_edge(child_node_name, parent_node)
 
+def render(yaml_data: Dict[str, Any], node_attrs: Dict[str, Any] = None, rankdir: str = "LR") -> nx.MultiDiGraph:
+    """
+    Renders a Python dictionary structure into a directed graph using NetworkX.
 
-def render(yaml_data: Any, node_attrs=None, rankdir="LR") -> nx.MultiDiGraph:
+    Parameters:
+    - yaml_data (Dict[str, Any]): The Python dictionary to render.
+    - node_attrs (Dict[str, Any], optional): A dictionary of attributes to apply to each node in the graph.
+      Defaults to a predefined set of node attributes.
+    - rankdir (str, optional): The direction of the graph layout. Defaults to "LR" (left to right).
+
+    Returns:
+    - nx.MultiDiGraph: The resulting directed graph.
+    """
     if node_attrs is None:
         node_attrs = {
             "fontname": "Fira Mono",
