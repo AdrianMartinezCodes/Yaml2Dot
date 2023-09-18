@@ -11,14 +11,16 @@ authors = [
   {name="Adrian Martinez", email="afmartinez1215@gmail.com"}]
 dependencies = [
     "PyYAML",
-    "pydot",
-    "click"
+    "networkx",
+    "click",
+    "pydot"
 ]
 [project.optional-dependencies]
 dev = [
     "mypy",
     "flake8",
     "yapf",
+    "isort"
 ]
 test = [
     "pytest",
