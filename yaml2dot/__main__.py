@@ -1,21 +1,30 @@
-import yaml
 import click
+import networkx as nx
+from pathlib import Path
 from yaml2dot.renderer import render
+from yaml2dot.yaml_loader import parse_yaml  # Import the parse_yaml function
 
 @click.command()
 @click.option("--input-file", type=click.File("r"), metavar="INPUT_FILE", required=True, help="Path to the input YAML file.")
-@click.option("--output-file", type=click.File("w"), metavar="OUTPUT_FILE", required=True, help="Path to the output DOT file.")
-def render_yaml(input_file, output_file):
+@click.option("--output-file", type=click.Path(), metavar="OUTPUT_FILE", required=True, help="Path to the output DOT file.")
+@click.option("--rankdir", type=click.Choice(['LR', 'TB']), default='LR', help="Rank direction (LR for left to right, TB for top to bottom).")
+def render_yaml(input_file, output_file, rankdir):
     """
     Render YAML data as a graph and save it as a DOT file.
-
-    Args:
-        INPUT_FILE (str): Path to the input YAML file.
-        OUTPUT_FILE (str): Path to the output DOT file.
     """
-    yaml_data = yaml.load(input_file, Loader=yaml.FullLoader)
-    pydot_graph = render(yaml_data)
-    output_file.write(pydot_graph.to_string())
+    yaml_data, yaml_error = parse_yaml(input_file)
+    if yaml_error:
+        click.echo(f"Error parsing YAML: {yaml_error}", err=True)
+        return 1
+
+    nx_graph = render(yaml_data, rankdir=rankdir)
+
+    # Create the directory for the output file if it doesn't exist
+    output_path = Path(output_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    pydot_graph = nx.drawing.nx_pydot.to_pydot(nx_graph)
+    pydot_graph.write_raw(output_path)
 
 if __name__ == "__main__":
     render_yaml()
