@@ -1,0 +1,10 @@
+person:
+  name: Alice
+  age: 28
+  address:
+    street: 456 Elm St
+    city: Another Town
+    zip: '54321'
+  hobbies:
+    - reading
+    - hiking

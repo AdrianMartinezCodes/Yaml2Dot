@@ -1,0 +1,15 @@
+graph:
+  nodes:
+    - id: A
+      label: Node A
+    - id: B
+      label: Node B
+    - id: C
+      label: Node C
+  edges:
+    - source: A
+      target: B
+    - source: B
+      target: C
+    - source: C
+      target: A

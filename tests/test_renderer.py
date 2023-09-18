@@ -1,40 +1,36 @@
 import networkx as nx
-import pydot
 import pytest
+import yaml
 from yaml2dot.renderer import render
-from tests.generate_large_graph import generate_large_graph
+from pathlib import Path
+import filecmp
 
+# Define a fixture to load example YAML files
+@pytest.fixture(params=["complex.yaml", "list.yaml", "mixed.yaml", "nested.yaml", "simple.yaml", "small_graph.yaml", "large_graph.yaml"])
+def sample_yaml_file(request):
+    # Construct the full path to the example YAML file
+    examples_dir = Path(__file__).resolve().parent.parent / "examples"
+    yaml_file_path = examples_dir / request.param
+    return str(yaml_file_path)
+
+# Define a fixture to get the corresponding expected DOT file
 @pytest.fixture
-def sample_yaml_data():
-    return [
-        {'Key': 'key1', 'Value': 'value1'},
-        {'Key': 'key2', 'Value': {'nested_key': 'nested_value'}},
-        {'Key': 'key3', 'Value': [1, 2, 3]},
-    ]
+def expected_dot_file(sample_yaml_file):
+    # Construct the full path to the expected DOT file in the tests directory
+    tests_dir = Path(__file__).resolve().parent
+    expected_dot_path = tests_dir / "expected_dot_files" / f"{Path(sample_yaml_file).stem}.dot"
+    return str(expected_dot_path)
 
-def test_render_basic(sample_yaml_data):
-    result = render(sample_yaml_data)
-    assert isinstance(result, pydot.Dot)
-    assert len(result.get_nodes()) == 9  
-    assert len(result.get_edges()) == 6   
+def test_render_with_example_files(sample_yaml_file, expected_dot_file):
+    with open(sample_yaml_file, "r") as yaml_file:
+        yaml_data = yaml.safe_load(yaml_file)
 
-def test_render_with_cache(sample_yaml_data):
-    result1 = render(sample_yaml_data)
-    result2 = render(sample_yaml_data)  # Rendering the same data again
+    result = render(yaml_data)
 
-    assert result1 is result2  # The result should be cached and the same object
+    # Generate a DOT file from the result
+    output_dot_file = "/tmp/output.dot"  # Use a temporary file for the generated DOT
+    pydot_graph = nx.drawing.nx_pydot.to_pydot(result)
+    pydot_graph.write_raw(output_dot_file)
 
-def test_render_empty_data():
-    empty_data = []
-    result = render(empty_data)
-    
-    assert isinstance(result, pydot.Dot)  # Updated to check for PyDot graph
-    assert len(result.get_nodes()) == 0   # Updated to check the number of nodes
-
-def test_generate_large_graph():
-    random_seed = 42  # Set your desired random seed
-    num_nodes = 1000  # Set the number of nodes for the large graph
-    large_graph = generate_large_graph(num_nodes, random_seed)
-
-    assert isinstance(large_graph, nx.DiGraph)
-    assert large_graph.number_of_nodes() == num_nodes
+    # Compare the generated DOT file with the expected DOT file
+    assert filecmp.cmp(output_dot_file, expected_dot_file, shallow=False)
