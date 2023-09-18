@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict
 import networkx as nx
 
 def render_yaml_structure(data: Dict[str, Any],
