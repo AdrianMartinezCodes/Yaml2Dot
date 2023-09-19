@@ -3,41 +3,8 @@ import json
 import networkx as nx
 from pathlib import Path
 from yaml2dot.renderer import render
-from yaml2dot.yaml_loader import parse_yaml
+from yaml2dot.yaml_loader import load_yaml_or_json
 from networkx.readwrite import json_graph  # Import for JSON export
-
-def load_yaml_or_json(file_path):
-    """
-    Load YAML or JSON data from a file.
-
-    Parameters:
-    - file_path (str): The path to the input file (YAML or JSON).
-
-    Returns:
-    - Loaded data or None if there was an error.
-    """
-    file_extension = Path(file_path).suffix.lower()
-
-    if file_extension == ".yaml" or file_extension == ".yml":
-        load_function = parse_yaml
-    elif file_extension == ".json":
-        load_function = json.load
-    else:
-        return None
-
-    try:
-        with open(file_path, "r") as file:
-            data = load_function(file)
-            if isinstance(data, tuple) and data[1] is not None:
-                click.echo(f"Error: {data[1]}", err=True)
-                return None
-            return data[0] if isinstance(data, tuple) else data
-    except json.JSONDecodeError as e:
-        click.echo(f"Error parsing JSON: {e}", err=True)
-        return None
-    except Exception as e:
-        click.echo(f"Error: {e}", err=True)
-        return None
 
 @click.command()
 @click.option("--input-file",
@@ -73,25 +40,32 @@ def render_yaml(input_file, output_file, rankdir, output_format):
     Returns:
     - None
     """
+    # Load the data from the input file using the load_yaml_or_json function
     data = load_yaml_or_json(input_file)
+
     if data is None:
         return
 
     nx_graph = render(data, rankdir=rankdir)
 
-    if output_format == 'dot':
+    # Create the directory for the output file if it doesn't exist
+    if output_file != "-":
         output_path = Path(output_file)
         output_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    if output_format == 'dot':
+        # Save the graph as a DOT file
         pydot_graph = nx.drawing.nx_pydot.to_pydot(nx_graph)
         pydot_graph.write_raw(output_path)
     elif output_format == 'json':
         if output_file == "-":
+            # Return the JSON data as a dictionary (stdout)
             json_data = json_graph.node_link_data(nx_graph)
             click.echo(json.dumps(json_data, indent=2))
         else:
-            output_path = Path(output_file)
-            json_data = json_graph.node_link_data(nx_graph)
+            # Save the JSON data to a file
             with open(output_path, 'w') as json_file:
+                json_data = json_graph.node_link_data(nx_graph)
                 json.dump(json_data, json_file, indent=2)
 
 if __name__ == "__main__":
