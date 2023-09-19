@@ -3,7 +3,7 @@ Python implementation of a yaml2dot converter. Now with JSON Support!
 
 Inspried by the original [yml2dot](https://github.com/lucasepe/yml2dot).
 
-The **YAML to DOT Converter** is a Python tool that allows you to convert YAML or JSON data into a graph visualization represented in the DOT (Graph Description Language) format. It utilizes NetworkX for creating the graph structure and PyDot for generating DOT files.
+The YAML to DOT Converter is a Python utility designed to transform YAML or JSON data into a visual graph representation, available in either the DOT (Graph Description Language) or JSON format. This tool employs NetworkX to construct the graph structure and offers the flexibility to produce either DOT files or JSON output in the form of node-link data.
 
 ## Table of Contents
 
@@ -49,18 +49,24 @@ $pip install .
 To convert a YAML/JSON file to a DOT file, use the following command:
 
 ```bash
-python __main__.py --input-file INPUT_FILE --output-file OUTPUT_FILE [--rankdir RANKDIR]
+yaml2dot --input-file INPUT_FILE --output-file OUTPUT_FILE [--rankdir RANKDIR] [--output-format OUTPUT_FORMAT]
 ```
 
 * INPUT_FILE: Path to the input YAML/JSON file.
 * OUTPUT_FILE: Path to the output DOT file.
 * RANKDIR (optional): Rank direction (LR for left to right, TB for top to bottom). Default is LR.
 
-Example usage:
+Example usage for conerting to DOT:
 
 ```bash
-python __main__.py --input-file input.yaml --output-file output.dot --rankdir LR
+yaml2dot --input-file input.yaml --output-file output.dot --rankdir LR
 ```
+
+Example usage for converting for node link data JSON:
+```base
+yaml2dot --input-file input.json --output-file output.json --output-format json
+```
+
 ## Examples
 ### Sample YAML Files
 
@@ -84,9 +90,16 @@ Please feel free to add more or convert the existing yamls into jsons.
 To render a sample YAML/JSON file, use the following command:
 
 ```bash
-python __main__.py --input-file examples/small_graph.yaml --output-file small_graph.dot --rankdir LR
+yaml2dot --input-file examples/small_graph.yaml --output-file small_graph.dot --rankdir LR
 ```
 This will generate a DOT file that can be visualized using Graphviz or other compatible tools.
+
+To render to JSON format:
+```bash
+yaml2dot --input-file examples/small_graph.yaml --output-file small_graph.json --rankdir LR --output-format json 
+
+```
+This will generate a node link data JSON file of the networkx graph that can be visualzied using [d3](https://d3js.org/).
 
 ## Development
 
