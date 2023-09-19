@@ -1,5 +1,7 @@
 from typing import Any, Dict
+
 import networkx as nx
+
 
 def render_yaml_structure(data: Dict[str, Any],
                           graph: nx.MultiDiGraph,
@@ -19,9 +21,7 @@ def render_yaml_structure(data: Dict[str, Any],
     Returns:
     - None
     """
-    graph.graph['graph'] = {
-        'rankdir': rankdir
-    }
+    graph.graph['graph'] = {'rankdir': rankdir}
 
     def add_node_and_edge(node_name: str, parent: str) -> None:
         """
@@ -72,7 +72,10 @@ def render_yaml_structure(data: Dict[str, Any],
                 child_node_name = str(item)
                 add_node_and_edge(child_node_name, parent_node)
 
-def render(data: Dict[str, Any], node_attrs: Dict[str, Any] = None, rankdir: str = "LR") -> nx.MultiDiGraph:
+
+def render(data: Dict[str, Any],
+           node_attrs: Dict[str, Any] = None,
+           rankdir: str = "LR") -> nx.MultiDiGraph:
     """
     Renders a Python dictionary structure into a directed graph using NetworkX.
 

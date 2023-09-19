@@ -1,10 +1,13 @@
-import click
 import json
-import networkx as nx
 from pathlib import Path
+
+import click
+import networkx as nx
+from networkx.readwrite import json_graph  # Import for JSON export
+
 from yaml2dot.renderer import render
 from yaml2dot.yaml_loader import load_yaml_or_json
-from networkx.readwrite import json_graph  # Import for JSON export
+
 
 @click.command()
 @click.option("--input-file",
@@ -22,11 +25,10 @@ from networkx.readwrite import json_graph  # Import for JSON export
     type=click.Choice(['LR', 'TB']),
     default='LR',
     help="Rank direction (LR for left to right, TB for top to bottom).")
-@click.option(
-    "--output-format",
-    type=click.Choice(['dot', 'json', '']),
-    default='dot',
-    help="Output format (DOT or JSON).")
+@click.option("--output-format",
+              type=click.Choice(['dot', 'json', '']),
+              default='dot',
+              help="Output format (DOT or JSON).")
 def render_yaml(input_file, output_file, rankdir, output_format):
     """
     Render YAML or JSON data as a graph and save it as a DOT or JSON file.
@@ -52,7 +54,7 @@ def render_yaml(input_file, output_file, rankdir, output_format):
     if output_file != "-":
         output_path = Path(output_file)
         output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     if output_format == 'dot':
         # Save the graph as a DOT file
         pydot_graph = nx.drawing.nx_pydot.to_pydot(nx_graph)
@@ -67,6 +69,7 @@ def render_yaml(input_file, output_file, rankdir, output_format):
             with open(output_path, 'w') as json_file:
                 json_data = json_graph.node_link_data(nx_graph)
                 json.dump(json_data, json_file, indent=2)
+
 
 if __name__ == "__main__":
     render_yaml()
