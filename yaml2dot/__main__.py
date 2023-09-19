@@ -46,19 +46,25 @@ def render_yaml(input_file, output_file, rankdir):
     # Load the data from the input file
     try:
         with open(input_file, "r") as file:
-            data, error = load_function(file)
-        if error:
-            click.echo(f"Error parsing file: {error}", err=True)
+            data = load_function(file)
+            if isinstance(data,tuple) and data[1] is not None:
+                click.echo(f"Error: {data[1]}", err=True)
+                return
+            if isinstance(data,tuple):
+                data = data[0]
+    except json.JSONDecodeError as e:
+        click.echo(f"Error parsing JSON: {e}", err=True)
+        return
     except Exception as e:
         click.echo(f"Error: {e}", err=True)
-    else:
-        nx_graph = render(data, rankdir=rankdir)
+        return
+    nx_graph = render(data, rankdir=rankdir)
 
-        # Create the directory for the output file if it doesn't exist
-        output_path = Path(output_file)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        pydot_graph = nx.drawing.nx_pydot.to_pydot(nx_graph)
-        pydot_graph.write_raw(output_path)
+    # Create the directory for the output file if it doesn't exist
+    output_path = Path(output_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    pydot_graph = nx.drawing.nx_pydot.to_pydot(nx_graph)
+    pydot_graph.write_raw(output_path)
 
 if __name__ == "__main__":
     render_yaml()
