@@ -1,9 +1,9 @@
 # pythonYaml2Dot
-Python implementation of a yaml2dot converter.
+Python implementation of a yaml2dot converter. Now with JSON Support!
 
 Inspried by the original [yml2dot](https://github.com/lucasepe/yml2dot).
 
-The **YAML to DOT Converter** is a Python tool that allows you to convert YAML data into a graph visualization represented in the DOT (Graph Description Language) format. It utilizes NetworkX for creating the graph structure and PyDot for generating DOT files.
+The **YAML to DOT Converter** is a Python tool that allows you to convert YAML or JSON data into a graph visualization represented in the DOT (Graph Description Language) format. It utilizes NetworkX for creating the graph structure and PyDot for generating DOT files.
 
 ## Table of Contents
 
@@ -13,6 +13,7 @@ The **YAML to DOT Converter** is a Python tool that allows you to convert YAML d
 - [Usage](#usage)
 - [Examples](#examples)
   - [Sample YAML Files](#sample-yaml-files)
+  - [Sample JSON File](#sample-json-file)
   - [Rendering Example](#rendering-example)
 - [Development](#development)
     - [Contributing](#contributing)
@@ -45,13 +46,13 @@ $pip install .
 
 ## Usage
 
-To convert a YAML file to a DOT file, use the following command:
+To convert a YAML/JSON file to a DOT file, use the following command:
 
 ```bash
 python __main__.py --input-file INPUT_FILE --output-file OUTPUT_FILE [--rankdir RANKDIR]
 ```
 
-* INPUT_FILE: Path to the input YAML file.
+* INPUT_FILE: Path to the input YAML/JSON file.
 * OUTPUT_FILE: Path to the output DOT file.
 * RANKDIR (optional): Rank direction (LR for left to right, TB for top to bottom). Default is LR.
 
@@ -72,10 +73,15 @@ The `examples` directory contains several sample YAML files that you can use for
 * simple.yaml: Simple YAML data with key-value pairs.
 * small_graph.yaml: A small example YAML data.
 * large_graph.yaml: A larger example YAML data.
+### Sample JSON File
+The `examples` directory contains an example json file for testing and experimentation.
+* sample_json.json: A naively "complex" JSON structure with nested objects and array.
+  
+Please feel free to add more or convert the existing yamls into jsons.
 
 ### Rendering Example
 
-To render a sample YAML file, use the following command:
+To render a sample YAML/JSON file, use the following command:
 
 ```bash
 python __main__.py --input-file examples/small_graph.yaml --output-file small_graph.dot --rankdir LR
