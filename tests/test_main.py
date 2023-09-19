@@ -81,3 +81,39 @@ def test_render_json_invalid_input(temp_dir):
     # Check if the result contains the expected error message
     assert "Error" in result.output
     assert not (temp_dir / "test.dot").exists()
+    
+def test_render_json_output(temp_dir):
+    json_data = {
+        "key1": "value1",
+        "key2": {
+            "nested_key": "nested_value"
+        },
+        "key3": [1, 2, 3]
+    }
+
+    json_file = temp_dir / "test_json.json"
+    dot_file = temp_dir / "test_json.dot"
+
+    with open(json_file, "w") as f:
+        json.dump(json_data, f)
+        
+    runner = CliRunner()
+    result = runner.invoke(render_yaml, [f"--input-file={json_file}", f"--output-file={dot_file}", "--rankdir=LR", "--output-format=json"])
+    assert dot_file.exists()
+    # Check if the generated JSON file is valid
+    with open(dot_file, "r") as f:
+        json_contents = json.load(f)
+        print(json_contents)
+        assert "nodes" in json_contents  # Ensure JSON data is preserved
+
+def test_render_json_output_invalid_input(temp_dir):
+    # Create an invalid JSON file
+    json_file = temp_dir / "invalid.json"
+    with open(json_file, "w") as f:
+        f.write("key1: value1, key2: value2")
+
+    runner = CliRunner()
+    result = runner.invoke(render_yaml, [f"--input-file={json_file}", "--output-file=test_json.dot", "--rankdir=LR", "--output-format=json"])
+    # Check if the result contains the expected error message
+    assert "Error" in result.output
+    assert not (temp_dir / "test_json.dot").exists()
