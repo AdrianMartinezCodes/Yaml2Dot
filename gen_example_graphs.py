@@ -1,47 +1,46 @@
 import os
 from pathlib import Path
-
-import networkx as nx
+import json
 import yaml
-
+import networkx as nx
 from yaml2dot.renderer import render
 
-# Define the directory containing the sample YAML files
-yaml_dir = Path("examples")
+# Define the directory containing the sample YAML and JSON files
+data_dir = Path("examples")
 
 # Define the directory to store the generated DOT files
-dot_dir = Path("tests/expected_dot_files")
+dot_dir = Path("tests/expected-dot-files")
 
 # Ensure the output directory exists
 dot_dir.mkdir(parents=True, exist_ok=True)
 
-# List of sample YAML files
-yaml_files = [
-    "complex.yaml",
-    "list.yaml",
-    "mixed.yaml",
-    "nested.yaml",
-    "simple.yaml",
-    "small_graph.yaml",
-    "large_graph.yaml",
-]
+# List of sample files (both YAML and JSON)
+file_extensions = [".yaml", ".json",".yml"]
 
-# Loop through the YAML files and generate DOT files
-for yaml_file in yaml_files:
-    # Load the YAML data
-    with open(yaml_dir / yaml_file, "r") as file:
-        yaml_data = yaml.safe_load(file)
+# Loop through the files and generate DOT files
+for file_extension in file_extensions:
+    # Find all files with the specified extension
+    data_files = [f for f in data_dir.glob(f"*{file_extension}")]
 
-    # Render YAML data as a graph
-    nx_graph = render(yaml_data)
+    for data_file in data_files:
+        # Load the data (JSON or YAML)
+        if file_extension == ".json":
+            with open(data_file, "r") as file:
+                data = json.load(file)
+        elif file_extension in [".yaml",".yml"]:
+            with open(data_file, "r") as file:
+                data = yaml.safe_load(file)
 
-    # Generate a DOT file from the graph
-    dot_filename = Path(os.path.splitext(yaml_file)[0] + ".dot")
-    dot_filepath = dot_dir / dot_filename
+        # Render data as a graph
+        nx_graph = render(data)
 
-    pydot_graph = nx.drawing.nx_pydot.to_pydot(nx_graph)
-    pydot_graph.write_raw(dot_filepath)
+        # Generate a DOT file from the graph
+        dot_filename = data_file.stem + ".dot"
+        dot_filepath = dot_dir / dot_filename
 
-    print(f"Generated DOT file: {dot_filepath}")
+        pydot_graph = nx.drawing.nx_pydot.to_pydot(nx_graph)
+        pydot_graph.write_raw(dot_filepath)
+
+        print(f"Generated DOT file: {dot_filepath}")
 
 print("DOT file generation complete.")
