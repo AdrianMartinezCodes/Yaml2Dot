@@ -72,12 +72,12 @@ def render_yaml_structure(data: Dict[str, Any],
                 child_node_name = str(item)
                 add_node_and_edge(child_node_name, parent_node)
 
-def render(yaml_data: Dict[str, Any], node_attrs: Dict[str, Any] = None, rankdir: str = "LR") -> nx.MultiDiGraph:
+def render(data: Dict[str, Any], node_attrs: Dict[str, Any] = None, rankdir: str = "LR") -> nx.MultiDiGraph:
     """
     Renders a Python dictionary structure into a directed graph using NetworkX.
 
     Parameters:
-    - yaml_data (Dict[str, Any]): The Python dictionary to render.
+    - data (Dict[str, Any]): The Python dictionary to render.
     - node_attrs (Dict[str, Any], optional): A dictionary of attributes to apply to each node in the graph.
       Defaults to a predefined set of node attributes.
     - rankdir (str, optional): The direction of the graph layout. Defaults to "LR" (left to right).
@@ -97,5 +97,5 @@ def render(yaml_data: Dict[str, Any], node_attrs: Dict[str, Any] = None, rankdir
         }
 
     result = nx.MultiDiGraph()
-    render_yaml_structure(yaml_data, result, node_attrs, rankdir=rankdir)
+    render_yaml_structure(data, result, node_attrs, rankdir=rankdir)
     return result
