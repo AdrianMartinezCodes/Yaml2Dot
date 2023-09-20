@@ -11,17 +11,24 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
-
+      uses: actions/checkout@v4
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
-        python-version: "3.10"
-
+        python-version: ${{ matrix.python-version }}
+    - name: Create virtual environment
+      run: python -m venv venv
+    - name: Activate virtual environment
+      run: source venv/bin/activate
     - name: Install project
       run: pip install '.[all]'
     - name: Set pythonpath
