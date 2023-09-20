@@ -5,7 +5,7 @@ import tempfile
 import yaml
 import json
 
-from yaml2dot.yaml_loader import load_yaml_or_json, parse_yaml
+from yaml2dot.data_loader import load_yaml_or_json, parse_yaml
 
 @pytest.fixture
 def sample_yaml_content():

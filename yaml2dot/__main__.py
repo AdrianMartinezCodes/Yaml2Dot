@@ -6,7 +6,7 @@ import networkx as nx
 from networkx.readwrite import json_graph  # Import for JSON export
 
 from yaml2dot.renderer import render
-from yaml2dot.yaml_loader import load_yaml_or_json
+from yaml2dot.data_loader import load_yaml_or_json
 
 
 @click.command()
