@@ -67,6 +67,24 @@ Example usage for converting for node link data JSON:
 yaml2dot --input-file input.json --output-file output.json --output-format json
 ```
 
+Here's an example of how to use the library's API to convert YAML or JSON data:
+```python
+import pythonYaml2Dot
+
+# Load YAML or JSON data from a file
+data = pythonYaml2Dot.load_yaml_or_json('input.yaml')
+
+# Convert the data to DOT format (default)
+dot_output = pythonYaml2Dot.convert_yaml_or_json_to_format(data)
+
+# Convert the data to JSON format
+json_output = pythonYaml2Dot.convert_yaml_or_json_to_format(data, output_format='json')
+
+# Print or save the outputs as needed
+print(dot_output)
+print(json_output)
+```
+
 ## Examples
 ### Sample YAML Files
 
