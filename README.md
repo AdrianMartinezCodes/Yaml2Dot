@@ -69,16 +69,18 @@ yaml2dot --input-file input.json --output-file output.json --output-format json
 
 Here's an example of how to use the library's API to convert YAML or JSON data:
 ```python
-import pythonYaml2Dot
+from yaml2dot import data_loader,converter
 
 # Load YAML or JSON data from a file
-data = pythonYaml2Dot.load_yaml_or_json('input.yaml')
+data = data_loader.load_yaml_or_json('input.yaml')
+# or input a python dict directly
+# data = {"example":"example"}
 
 # Convert the data to DOT format (default)
-dot_output = pythonYaml2Dot.convert_yaml_or_json_to_format(data)
+dot_output = converter.convert_yaml_or_json_to_format(data)
 
 # Convert the data to JSON format
-json_output = pythonYaml2Dot.convert_yaml_or_json_to_format(data, output_format='json')
+json_output = converter.convert_yaml_or_json_to_format(data, output_format='json')
 
 # Print or save the outputs as needed
 print(dot_output)
