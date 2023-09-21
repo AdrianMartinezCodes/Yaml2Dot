@@ -4,11 +4,20 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yaml2dot"
-version='1.0.0'
+version='1.2.0'
 description= 'Python Yaml to Dot Converter'
-requires-python= '>=3.10'
+requires-python= '>=3.8'
 authors = [
   {name="Adrian Martinez", email="afmartinez1215@gmail.com"}]
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
 dependencies = [
     "PyYAML",
     "networkx",

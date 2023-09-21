@@ -4,6 +4,7 @@ import networkx as nx
 import pytest
 import yaml
 import json
+import tempfile
 
 from yaml2dot.renderer import render
 
@@ -41,10 +42,12 @@ def test_render_with_example_files(sample_data_file, expected_dot_file):
 
     result = render(data)
 
-    # Generate a DOT file from the result
-    output_dot_file = "/tmp/output.dot"  # Use a temporary file for the generated DOT
-    pydot_graph = nx.drawing.nx_pydot.to_pydot(result)
-    pydot_graph.write_raw(output_dot_file)
+    # Create a temporary directory for the DOT output
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # Generate a DOT file in the temporary directory
+        output_dot_file = Path(temp_dir) / "output.dot"
+        pydot_graph = nx.drawing.nx_pydot.to_pydot(result)
+        pydot_graph.write_raw(str(output_dot_file))
 
-    # Compare the generated DOT file with the expected DOT file
-    assert filecmp.cmp(output_dot_file, expected_dot_file, shallow=False)
+        # Compare the generated DOT file with the expected DOT file
+        assert filecmp.cmp(output_dot_file, expected_dot_file, shallow=False)
