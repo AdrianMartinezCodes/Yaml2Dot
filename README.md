@@ -35,13 +35,13 @@ Before using the YAML to DOT Converter, ensure you have the following dependenci
 You can install NetworkX, PyDot, and Click using pip:
 
 ```bash
-$pip install networkx pydot click
+pip install networkx pydot click
 ```
 
 or you can simply clone the repository and navigate to the project directory:
 
 ```bash
-$pip install .
+pip install .
 ```
 
 ## Usage
@@ -130,7 +130,7 @@ Contributions are welcome! I don't have any formal contributing guidelines but s
 ### Dev Install
 The fastest way to start developing is to clone the repository and run the following command:
 ```bash
-#pip install '.[all]'
+pip install '.[all]'
 ```
 ### Testing
 
