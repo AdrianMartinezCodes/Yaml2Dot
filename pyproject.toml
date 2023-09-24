@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yaml2dot"
-version='1.2.0'
+version='1.3.1'
 description= 'Python Yaml to Dot Converter'
 requires-python= '>=3.8'
 authors = [
@@ -24,6 +24,12 @@ dependencies = [
     "click",
     "pydot"
 ]
+
+
+[project.urls]
+Homepage = "https://github.com/AdrianMartinezCodes/pythonYaml2Dot"
+Repository = "https://github.com/AdrianMartinezCodes/pythonYaml2Dot.git"
+
 [project.optional-dependencies]
 dev = [
     "mypy",
