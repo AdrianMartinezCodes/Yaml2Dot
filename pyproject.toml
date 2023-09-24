@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yaml2dot"
-version='1.3.1'
+version='1.2.0'
 description= 'Python Yaml to Dot Converter'
 requires-python= '>=3.8'
 authors = [
