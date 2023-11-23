@@ -20,7 +20,7 @@ person:
     - reading
     - hiking
 ```
-into this easy to read graph:
+into this easy to read graph(after rendering using d3-graphviz):
 
 ![Nested Yaml](/examples/nested.png)
 
