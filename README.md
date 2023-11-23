@@ -6,6 +6,24 @@ Inspried by the original [yml2dot](https://github.com/lucasepe/yml2dot).
 
 The YAML to DOT Converter is a Python utility designed to transform YAML or JSON data into a visual graph representation, available in either the DOT (Graph Description Language) or JSON format. This tool employs NetworkX to construct the graph structure and offers the flexibility to produce either DOT files or JSON output in the form of node-link data.
 
+Transform this data:
+
+```yaml
+person:
+  name: Alice
+  age: 28
+  address:
+    street: 456 Elm St
+    city: Another Town
+    zip: '54321'
+  hobbies:
+    - reading
+    - hiking
+```
+into this easy to read graph:
+
+![Nested Yaml](/examples/nested.png)
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
@@ -21,6 +39,7 @@ The YAML to DOT Converter is a Python utility designed to transform YAML or JSON
   - [Install](#dev-install)
   - [Testing](#testing)
 - [License](#license)
+
 
 ## Getting Started
 
