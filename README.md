@@ -1,6 +1,8 @@
-# pythonYaml2Dot
+# Yaml2Dot
 
 Python implementation of a yaml2dot converter. Now with JSON Support!
+
+Check out a demo at my personal page [teamayejay.com/Adrian/Yaml2Dot](https://teamayejay.com/Adrian/Yaml2Dot).
 
 Inspried by the original [yml2dot](https://github.com/lucasepe/yml2dot).
 
