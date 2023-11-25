@@ -3,7 +3,7 @@ from pathlib import Path
 
 import click
 import networkx as nx
-from networkx.readwrite import json_graph  # Import for JSON export
+from networkx.readwrite import json_graph 
 
 from yaml2dot.data_loader import load_yaml_or_json
 from yaml2dot.renderer import render
