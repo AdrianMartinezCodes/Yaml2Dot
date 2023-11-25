@@ -1,6 +1,7 @@
 from typing import Any, Dict
 import networkx as nx
 
+
 def create_graph(rankdir: str = "LR") -> nx.MultiDiGraph:
     """
     Creates a new directed graph with specified layout direction.
@@ -15,11 +16,14 @@ def create_graph(rankdir: str = "LR") -> nx.MultiDiGraph:
     graph.graph['graph'] = {'rankdir': rankdir}
     return graph
 
-def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str, node_attrs: Dict[str, Any]) -> None:
+
+def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str,
+             node_attrs: Dict[str, Any]) -> None:
     """
     Adds a node and an edge to the graph.
     """
-    if ":" in node_name and not (node_name.startswith('"') and node_name.endswith('"')):
+    if ":" in node_name and not (node_name.startswith('"') and
+                                 node_name.endswith('"')):
         print(f"Quoting node name: {node_name}")
         node_name = f'"{node_name}"'
 
@@ -29,7 +33,8 @@ def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str, node_attrs: Di
         graph.add_edge(parent, node_name, arrowhead="none", penwidth="2.0")
 
 
-def process_data(data: Any, graph: nx.MultiDiGraph, parent_node: str, node_attrs: Dict[str, Any]) -> None:
+def process_data(data: Any, graph: nx.MultiDiGraph, parent_node: str,
+                 node_attrs: Dict[str, Any]) -> None:
     """
     Processes the data and adds nodes and edges to the graph.
     """
@@ -50,7 +55,10 @@ def process_data(data: Any, graph: nx.MultiDiGraph, parent_node: str, node_attrs
                 item_str = str(item)  # Convert simple items to string
                 add_node(graph, item_str, parent_node, node_attrs)
 
-def render(data: Dict[str, Any], node_attrs: Dict[str, Any] = None, rankdir: str = "LR") -> nx.MultiDiGraph:
+
+def render(data: Dict[str, Any],
+           node_attrs: Dict[str, Any] = None,
+           rankdir: str = "LR") -> nx.MultiDiGraph:
     """
     Renders a Python dictionary structure into a directed graph using NetworkX.
 

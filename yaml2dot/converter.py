@@ -5,7 +5,10 @@ from typing import Optional, Union
 from yaml2dot.renderer import render
 from networkx.readwrite import json_graph
 
-def convert_yaml_or_json_to_format(data: Union[dict, None], output_format: str = 'dot', rankdir: str = 'LR') -> Optional[str]:
+
+def convert_yaml_or_json_to_format(data: Union[dict, None],
+                                   output_format: str = 'dot',
+                                   rankdir: str = 'LR') -> Optional[str]:
     """
     Convert YAML or JSON data to DOT or JSON format.
 
@@ -19,11 +22,11 @@ def convert_yaml_or_json_to_format(data: Union[dict, None], output_format: str =
     """
     if data is None:
         return None
-    
+
     if not isinstance(data, dict):
         return None
     # We can probably include more data validations
-    
+
     nx_graph = render(data, rankdir=rankdir)
 
     if output_format == 'dot':

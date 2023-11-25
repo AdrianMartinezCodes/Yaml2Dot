@@ -1,6 +1,7 @@
 from typing import Any, Dict
 import networkx as nx
 
+
 def create_graph(rankdir: str = "LR") -> nx.MultiDiGraph:
     """
     Creates a new directed graph with specified layout direction.
@@ -15,19 +16,23 @@ def create_graph(rankdir: str = "LR") -> nx.MultiDiGraph:
     graph.graph['graph'] = {'rankdir': rankdir}
     return graph
 
-def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str, node_attrs: Dict[str, Any]) -> None:
-    if ":" in node_name and not (node_name.startswith('"') and node_name.endswith('"')):
-        node_name = node_name.replace(":","-")
+
+def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str,
+             node_attrs: Dict[str, Any]) -> None:
+    if ":" in node_name and not (node_name.startswith('"') and
+                                 node_name.endswith('"')):
+        node_name = node_name.replace(":", "-")
     graph.add_node(node_name, label=node_name, **node_attrs)
     if parent is not None:
         # Ensure parent name is correctly formatted
-        if ":" in parent and not (parent.startswith('"') and parent.endswith('"')):
+        if ":" in parent and not (parent.startswith('"') and
+                                  parent.endswith('"')):
             parent = f'"{parent}"'
         graph.add_edge(parent, node_name, arrowhead="none", penwidth="2.0")
 
 
-
-def process_data(data: Any, graph: nx.MultiDiGraph, parent_path: str, node_attrs: Dict[str, Any]) -> None:
+def process_data(data: Any, graph: nx.MultiDiGraph, parent_path: str,
+                 node_attrs: Dict[str, Any]) -> None:
     """
     Processes the data and adds nodes and edges to the graph.
     """
@@ -50,6 +55,7 @@ def process_data(data: Any, graph: nx.MultiDiGraph, parent_path: str, node_attrs
                 item_str = str(item)
                 add_node(graph, item_str, item_path, node_attrs)
 
+
 def rename_nodes_for_rendering(graph: nx.MultiDiGraph) -> None:
     """
     Renames nodes for rendering by using only the last part of the path as the label.
@@ -60,7 +66,9 @@ def rename_nodes_for_rendering(graph: nx.MultiDiGraph) -> None:
         graph.nodes[node]['label'] = new_label
 
 
-def render(data: Dict[str, Any], node_attrs: Dict[str, Any] = None, rankdir: str = "LR") -> nx.MultiDiGraph:
+def render(data: Dict[str, Any],
+           node_attrs: Dict[str, Any] = None,
+           rankdir: str = "LR") -> nx.MultiDiGraph:
     """
     Renders a Python dictionary structure into a directed graph using NetworkX.
 
