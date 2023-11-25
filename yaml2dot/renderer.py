@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Dict, Union
 
 import networkx as nx
 
@@ -32,8 +32,9 @@ def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str,
         graph.add_edge(parent, node_name, arrowhead="none", penwidth="2.0")
 
 
-def process_data(data: Any, graph: nx.MultiDiGraph, parent_path: str | None,
-                 node_attrs: Dict[str, Any]) -> None:
+def process_data(data: Any, graph: nx.MultiDiGraph,
+                 parent_path: Union[str, None], node_attrs: Dict[str,
+                                                                 Any]) -> None:
     """
     Processes the data and adds nodes and edges to the graph.
     """
