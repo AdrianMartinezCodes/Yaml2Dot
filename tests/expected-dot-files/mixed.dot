@@ -1,0 +1,29 @@
+digraph  {
+rankdir=LR;
+name [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=name, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"name/John Doe" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="John Doe", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+age [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=age, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"age/30" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=30, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+address [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=address, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"address/street" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=street, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"address/street/123 Main St" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="123 Main St", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"address/city" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=city, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"address/city/Anytown" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=Anytown, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"address/zip" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=zip, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"address/zip/12345" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=12345, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+emails [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=emails, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"john@example.com" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="john@example.com", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"emails/0/emails" [label=emails];
+"jane@example.com" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="jane@example.com", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"emails/1/emails" [label=emails];
+name -> "name/John Doe"  [arrowhead=none, key=0, penwidth="2.0"];
+age -> "age/30"  [arrowhead=none, key=0, penwidth="2.0"];
+address -> "address/street"  [arrowhead=none, key=0, penwidth="2.0"];
+address -> "address/city"  [arrowhead=none, key=0, penwidth="2.0"];
+address -> "address/zip"  [arrowhead=none, key=0, penwidth="2.0"];
+"address/street" -> "address/street/123 Main St"  [arrowhead=none, key=0, penwidth="2.0"];
+"address/city" -> "address/city/Anytown"  [arrowhead=none, key=0, penwidth="2.0"];
+"address/zip" -> "address/zip/12345"  [arrowhead=none, key=0, penwidth="2.0"];
+"emails/0/emails" -> "john@example.com"  [arrowhead=none, key=0, penwidth="2.0"];
+"emails/1/emails" -> "jane@example.com"  [arrowhead=none, key=0, penwidth="2.0"];
+}

@@ -1,0 +1,35 @@
+digraph  {
+rankdir=LR;
+sample_graph [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=sample_graph, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/nodes" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=nodes, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/nodes/0/sample_graph/nodes/id" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=id, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/nodes/0/sample_graph/nodes" [label=nodes];
+"sample_graph/nodes/0/sample_graph/nodes/id/A" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=A, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/nodes/0/sample_graph/nodes/label" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=label, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/nodes/0/sample_graph/nodes/label/Node A" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="Node A", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/nodes/1/sample_graph/nodes/id" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=id, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/nodes/1/sample_graph/nodes" [label=nodes];
+"sample_graph/nodes/1/sample_graph/nodes/id/B" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=B, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/nodes/1/sample_graph/nodes/label" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=label, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/nodes/1/sample_graph/nodes/label/Node B" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="Node B", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/edges" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=edges, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/edges/0/sample_graph/edges/source" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=source, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/edges/0/sample_graph/edges" [label=edges];
+"sample_graph/edges/0/sample_graph/edges/source/A" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=A, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/edges/0/sample_graph/edges/target" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=target, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"sample_graph/edges/0/sample_graph/edges/target/B" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=B, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+sample_graph -> "sample_graph/nodes"  [arrowhead=none, key=0, penwidth="2.0"];
+sample_graph -> "sample_graph/edges"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/nodes/0/sample_graph/nodes/id" -> "sample_graph/nodes/0/sample_graph/nodes/id/A"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/nodes/0/sample_graph/nodes" -> "sample_graph/nodes/0/sample_graph/nodes/id"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/nodes/0/sample_graph/nodes" -> "sample_graph/nodes/0/sample_graph/nodes/label"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/nodes/0/sample_graph/nodes/label" -> "sample_graph/nodes/0/sample_graph/nodes/label/Node A"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/nodes/1/sample_graph/nodes/id" -> "sample_graph/nodes/1/sample_graph/nodes/id/B"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/nodes/1/sample_graph/nodes" -> "sample_graph/nodes/1/sample_graph/nodes/id"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/nodes/1/sample_graph/nodes" -> "sample_graph/nodes/1/sample_graph/nodes/label"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/nodes/1/sample_graph/nodes/label" -> "sample_graph/nodes/1/sample_graph/nodes/label/Node B"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/edges/0/sample_graph/edges/source" -> "sample_graph/edges/0/sample_graph/edges/source/A"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/edges/0/sample_graph/edges" -> "sample_graph/edges/0/sample_graph/edges/source"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/edges/0/sample_graph/edges" -> "sample_graph/edges/0/sample_graph/edges/target"  [arrowhead=none, key=0, penwidth="2.0"];
+"sample_graph/edges/0/sample_graph/edges/target" -> "sample_graph/edges/0/sample_graph/edges/target/B"  [arrowhead=none, key=0, penwidth="2.0"];
+}

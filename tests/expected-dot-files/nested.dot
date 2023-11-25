@@ -1,0 +1,34 @@
+digraph  {
+rankdir=LR;
+person [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=person, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/name" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=name, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/name/Alice" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=Alice, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/age" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=age, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/age/28" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=28, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/address" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=address, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/address/street" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=street, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/address/street/456 Elm St" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="456 Elm St", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/address/city" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=city, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/address/city/Another Town" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="Another Town", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/address/zip" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=zip, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/address/zip/54321" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=54321, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/hobbies" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=hobbies, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+reading [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=reading, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/hobbies/0/person/hobbies" [label=hobbies];
+hiking [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=hiking, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"person/hobbies/1/person/hobbies" [label=hobbies];
+person -> "person/name"  [arrowhead=none, key=0, penwidth="2.0"];
+person -> "person/age"  [arrowhead=none, key=0, penwidth="2.0"];
+person -> "person/address"  [arrowhead=none, key=0, penwidth="2.0"];
+person -> "person/hobbies"  [arrowhead=none, key=0, penwidth="2.0"];
+"person/name" -> "person/name/Alice"  [arrowhead=none, key=0, penwidth="2.0"];
+"person/age" -> "person/age/28"  [arrowhead=none, key=0, penwidth="2.0"];
+"person/address" -> "person/address/street"  [arrowhead=none, key=0, penwidth="2.0"];
+"person/address" -> "person/address/city"  [arrowhead=none, key=0, penwidth="2.0"];
+"person/address" -> "person/address/zip"  [arrowhead=none, key=0, penwidth="2.0"];
+"person/address/street" -> "person/address/street/456 Elm St"  [arrowhead=none, key=0, penwidth="2.0"];
+"person/address/city" -> "person/address/city/Another Town"  [arrowhead=none, key=0, penwidth="2.0"];
+"person/address/zip" -> "person/address/zip/54321"  [arrowhead=none, key=0, penwidth="2.0"];
+"person/hobbies/0/person/hobbies" -> reading  [arrowhead=none, key=0, penwidth="2.0"];
+"person/hobbies/1/person/hobbies" -> hiking  [arrowhead=none, key=0, penwidth="2.0"];
+}
