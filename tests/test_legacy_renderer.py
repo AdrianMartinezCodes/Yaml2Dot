@@ -6,12 +6,12 @@ import yaml
 import json
 import tempfile
 
-from yaml2dot.renderer import render
+from yaml2dot.legacy_renderer import render
 
 # Define a fixture to load example YAML or JSON files
 @pytest.fixture(params=[
     "complex.yaml", "list.yaml", "mixed.yaml", "nested.yaml", "simple.yaml",
-    "small_graph.yaml", "large_graph.yaml", "complex.yaml", "list.yaml",
+    "small_graph.yaml", "large_graph.yaml", "list.yaml",
 ])
 def sample_data_file(request):
     # Construct the full path to the example data file (YAML or JSON)
@@ -24,7 +24,7 @@ def sample_data_file(request):
 def expected_dot_file(sample_data_file):
     # Construct the full path to the expected DOT file in the tests directory
     tests_dir = Path(__file__).resolve().parent
-    expected_dot_path = tests_dir / "expected-dot-files" / f"{Path(sample_data_file).stem}.dot"
+    expected_dot_path = tests_dir / "expected-dot-files-legacy" / f"{Path(sample_data_file).stem}.dot"
     return str(expected_dot_path)
 
 def test_render_with_example_files(sample_data_file, expected_dot_file):
