@@ -1,9 +1,10 @@
 import json
-import networkx as nx
 from typing import Optional, Union
 
-from yaml2dot.renderer import render
+import networkx as nx
 from networkx.readwrite import json_graph
+
+from yaml2dot.renderer import render
 
 
 def convert_yaml_or_json_to_format(data: Union[dict, None],
