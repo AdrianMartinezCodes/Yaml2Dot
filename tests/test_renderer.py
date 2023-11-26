@@ -1,10 +1,11 @@
 import filecmp
+import json
+import tempfile
 from pathlib import Path
+
 import networkx as nx
 import pytest
 import yaml
-import json
-import tempfile
 
 from yaml2dot.renderer import render
 

@@ -1,6 +1,8 @@
 import json
-import pytest
+
 import networkx as nx
+import pytest
+
 from yaml2dot.converter import convert_yaml_or_json_to_format
 
 # Define sample YAML and JSON data for testing

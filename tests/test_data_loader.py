@@ -1,9 +1,10 @@
-import os
 import io
-import pytest
-import tempfile
-import yaml
 import json
+import os
+import tempfile
+
+import pytest
+import yaml
 
 from yaml2dot.data_loader import load_yaml_or_json, parse_yaml
 

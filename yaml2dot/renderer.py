@@ -1,9 +1,11 @@
-from typing import Any, Dict, Union , Final
 from collections import deque
+from typing import Any, Dict, Final, Union
+
 import networkx as nx
 
 SEPARATOR: Final = "__"
 HANDLE_COLON: Final = "---"
+
 
 def create_graph(rankdir: str = "LR") -> nx.MultiDiGraph:
     """
@@ -34,8 +36,8 @@ def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str,
         graph.add_edge(parent, node_name, arrowhead="none", penwidth="2.0")
 
 
-
-def process_data_bfs(data: Any, graph: nx.MultiDiGraph, node_attrs: Dict[str, Any]) -> None:
+def process_data_bfs(data: Any, graph: nx.MultiDiGraph,
+                     node_attrs: Dict[str, Any]) -> None:
     queue = deque([(data, "", None)])  # Initialize with the root data
 
     while queue:
@@ -46,7 +48,7 @@ def process_data_bfs(data: Any, graph: nx.MultiDiGraph, node_attrs: Dict[str, An
                 child_path = f"{parent_path}{SEPARATOR}{key}" if parent_path else key
                 if not graph.has_node(child_path):
                     add_node(graph, child_path, parent_node, node_attrs)
-                
+
                 # Process the value
                 if isinstance(value, (dict, list)):
                     queue.append((value, child_path, child_path))
@@ -69,7 +71,6 @@ def process_data_bfs(data: Any, graph: nx.MultiDiGraph, node_attrs: Dict[str, An
                         add_node(graph, value_path, parent_path, node_attrs)
 
 
-
 def rename_nodes_for_rendering(graph: nx.MultiDiGraph) -> None:
     """
     Renames nodes for rendering by using only the last part of the path as the label.
@@ -78,7 +79,7 @@ def rename_nodes_for_rendering(graph: nx.MultiDiGraph) -> None:
         # Use only the last part of the path as the label
         new_label = node.split(SEPARATOR)[-1]
         if "---" in new_label:
-            new_label = new_label.replace(HANDLE_COLON,":")
+            new_label = new_label.replace(HANDLE_COLON, ":")
             new_label = f'"{new_label}"'
         graph.nodes[node]['label'] = new_label
 

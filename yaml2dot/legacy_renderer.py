@@ -1,8 +1,8 @@
 # LEGACY CODE NOTICE
 # ==============================================================================
-# This file, legacy_renderer.py, contains legacy code that is no longer 
+# This file, legacy_renderer.py, contains legacy code that is no longer
 # officially supported. It is included for backward compatibility reasons.
-# Users are encouraged to use the updated version of this library for 
+# Users are encouraged to use the updated version of this library for
 # access to new features and ongoing support.
 # ==============================================================================
 
