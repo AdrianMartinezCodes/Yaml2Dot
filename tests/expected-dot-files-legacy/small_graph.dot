@@ -1,0 +1,28 @@
+digraph  {
+rankdir=LR;
+sample_graph [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=sample_graph, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+nodes [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=nodes, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+id [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=id, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+A [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=A, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+label [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=label, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"Node A" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="Node A", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+B [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=B, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+"Node B" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="Node B", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+edges [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=edges, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+source [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=source, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+target [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=target, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+sample_graph -> nodes  [arrowhead=none, key=0, penwidth="2.0"];
+sample_graph -> edges  [arrowhead=none, key=0, penwidth="2.0"];
+nodes -> id  [arrowhead=none, key=0, penwidth="2.0"];
+nodes -> id  [arrowhead=none, key=1, penwidth="2.0"];
+nodes -> label  [arrowhead=none, key=0, penwidth="2.0"];
+nodes -> label  [arrowhead=none, key=1, penwidth="2.0"];
+id -> A  [arrowhead=none, key=0, penwidth="2.0"];
+id -> B  [arrowhead=none, key=0, penwidth="2.0"];
+label -> "Node A"  [arrowhead=none, key=0, penwidth="2.0"];
+label -> "Node B"  [arrowhead=none, key=0, penwidth="2.0"];
+edges -> source  [arrowhead=none, key=0, penwidth="2.0"];
+edges -> target  [arrowhead=none, key=0, penwidth="2.0"];
+source -> A  [arrowhead=none, key=0, penwidth="2.0"];
+target -> B  [arrowhead=none, key=0, penwidth="2.0"];
+}

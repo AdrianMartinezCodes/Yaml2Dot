@@ -1,4 +1,4 @@
-graph:
+sample-graph:
   nodes:
     - id: A
       label: Node A

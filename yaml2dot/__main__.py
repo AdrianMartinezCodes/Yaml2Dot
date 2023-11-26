@@ -3,10 +3,10 @@ from pathlib import Path
 
 import click
 import networkx as nx
-from networkx.readwrite import json_graph  # Import for JSON export
+from networkx.readwrite import json_graph
 
-from yaml2dot.renderer import render
 from yaml2dot.data_loader import load_yaml_or_json
+from yaml2dot.renderer import render
 
 
 @click.command()
@@ -56,7 +56,6 @@ def render_yaml(input_file, output_file, rankdir, output_format):
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
     if output_format == 'dot':
-        # Save the graph as a DOT file
         pydot_graph = nx.drawing.nx_pydot.to_pydot(nx_graph)
         pydot_graph.write_raw(output_path)
     elif output_format == 'json':

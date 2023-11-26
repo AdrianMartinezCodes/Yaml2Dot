@@ -1,10 +1,10 @@
 digraph  {
 rankdir=LR;
 fruits [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=fruits, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-apple [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=apple, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-banana [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=banana, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-orange [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=orange, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-fruits -> apple  [arrowhead=none, key=0, penwidth="2.0"];
-fruits -> banana  [arrowhead=none, key=0, penwidth="2.0"];
-fruits -> orange  [arrowhead=none, key=0, penwidth="2.0"];
+fruits__apple [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=apple, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+fruits__banana [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=banana, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+fruits__orange [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=orange, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+fruits -> fruits__apple  [arrowhead=none, key=0, penwidth="2.0"];
+fruits -> fruits__banana  [arrowhead=none, key=0, penwidth="2.0"];
+fruits -> fruits__orange  [arrowhead=none, key=0, penwidth="2.0"];
 }
