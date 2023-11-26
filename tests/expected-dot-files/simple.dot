@@ -1,6 +1,6 @@
 digraph  {
 rankdir=LR;
 message [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=message, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-"message/Hello, World!" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="Hello, World!", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-message -> "message/Hello, World!"  [arrowhead=none, key=0, penwidth="2.0"];
+"message__Hello, World!" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="Hello, World!", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+message -> "message__Hello, World!"  [arrowhead=none, key=0, penwidth="2.0"];
 }

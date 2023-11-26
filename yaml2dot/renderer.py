@@ -1,7 +1,9 @@
-from typing import Any, Dict, Union
-
+from typing import Any, Dict, Union , Final
+from collections import deque
 import networkx as nx
 
+SEPARATOR: Final = "__"
+HANDLE_COLON: Final = "---"
 
 def create_graph(rankdir: str = "LR") -> nx.MultiDiGraph:
     """
@@ -22,7 +24,7 @@ def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str,
              node_attrs: Dict[str, Any]) -> None:
     if ":" in node_name and not (node_name.startswith('"') and
                                  node_name.endswith('"')):
-        node_name = node_name.replace(":", "-")
+        node_name = node_name.replace(":", HANDLE_COLON)
     graph.add_node(node_name, label=node_name, **node_attrs)
     if parent is not None:
         # Ensure parent name is correctly formatted
@@ -32,30 +34,35 @@ def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str,
         graph.add_edge(parent, node_name, arrowhead="none", penwidth="2.0")
 
 
-def process_data(data: Any, graph: nx.MultiDiGraph,
-                 parent_path: Union[str, None], node_attrs: Dict[str,
-                                                                 Any]) -> None:
-    """
-    Processes the data and adds nodes and edges to the graph.
-    """
-    if isinstance(data, dict):
-        for key, value in data.items():
-            child_path = f"{parent_path}/{key}" if parent_path else key
-            add_node(graph, child_path, parent_path, node_attrs)
-            if isinstance(value, (dict, list)):
-                process_data(value, graph, child_path, node_attrs)
-            else:
-                value_str = str(value)
-                value_path = f"{child_path}/{value_str}"
-                add_node(graph, value_path, child_path, node_attrs)
-    elif isinstance(data, list):
-        for index, item in enumerate(data):
-            item_path = f"{parent_path}/{str(index)}/{parent_path}"
-            if isinstance(item, (dict, list)):
-                process_data(item, graph, item_path, node_attrs)
-            else:
-                item_str = str(item)
-                add_node(graph, item_str, item_path, node_attrs)
+
+def process_data_bfs(data: Any, graph: nx.MultiDiGraph, node_attrs: Dict[str, Any]) -> None:
+    queue = deque([(data, "", None)])  # Initialize with the root data
+
+    while queue:
+        current_data, parent_path, parent_node = queue.popleft()
+
+        if isinstance(current_data, dict):
+            for key, value in current_data.items():
+                child_path = f"{parent_path}{SEPARATOR}{key}" if parent_path else key
+                add_node(graph, child_path, parent_node, node_attrs)
+                
+                # Process the value
+                if isinstance(value, (dict, list)):
+                    queue.append((value, child_path, child_path))
+                else:
+                    value_path = f"{child_path}{SEPARATOR}{value}"
+                    add_node(graph, value_path, child_path, node_attrs)
+
+        elif isinstance(current_data, list):
+            for index, item in enumerate(current_data):
+                item_path = f"{parent_path}{SEPARATOR}{index}"
+                add_node(graph, item_path, parent_node, node_attrs)
+                if isinstance(item, (dict, list)):
+                    queue.append((item, item_path, item_path))
+                else:
+                    # Process simple list items as values
+                    value_path = f"{item_path}{SEPARATOR}{item}"
+                    add_node(graph, value_path, item_path, node_attrs)
 
 
 def rename_nodes_for_rendering(graph: nx.MultiDiGraph) -> None:
@@ -64,7 +71,10 @@ def rename_nodes_for_rendering(graph: nx.MultiDiGraph) -> None:
     """
     for node in graph.nodes:
         # Use only the last part of the path as the label
-        new_label = node.split('/')[-1]
+        new_label = node.split(SEPARATOR)[-1]
+        if "---" in new_label:
+            new_label = new_label.replace(HANDLE_COLON,":")
+            new_label = f'"{new_label}"'
         graph.nodes[node]['label'] = new_label
 
 
@@ -94,6 +104,6 @@ def render(data: Dict[str, Any],
     final_node_attrs = node_attrs or default_node_attrs
 
     graph = create_graph(rankdir)
-    process_data(data, graph, None, final_node_attrs)
+    process_data_bfs(data, graph, final_node_attrs)
     rename_nodes_for_rendering(graph)
     return graph

@@ -197,265 +197,365 @@ def test_render_yaml_stream(temp_dir, capfd):
     assert parsed_json["directed"] is True
 
     # Check that the JSON contains the expected data from the YAML input
-    expected_nodes = [{
-        "label": "Key",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/0/None/Key"
-    }, {
-        "label": "None",
-        "id": "None/0/None"
-    }, {
-        "label": "key1",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/0/None/Key/key1"
-    }, {
-        "label": "Value",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/0/None/Value"
-    }, {
-        "label": "value1",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/0/None/Value/value1"
-    }, {
-        "label": "Key",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/1/None/Key"
-    }, {
-        "label": "None",
-        "id": "None/1/None"
-    }, {
-        "label": "key2",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/1/None/Key/key2"
-    }, {
-        "label": "Value",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/1/None/Value"
-    }, {
-        "label": "nested_key",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/1/None/Value/nested_key"
-    }, {
-        "label": "nested_value",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/1/None/Value/nested_key/nested_value"
-    }, {
-        "label": "Key",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/2/None/Key"
-    }, {
-        "label": "None",
-        "id": "None/2/None"
-    }, {
-        "label": "key3",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/2/None/Key/key3"
-    }, {
-        "label": "Value",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "None/2/None/Value"
-    }, {
-        "label": "1",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "1"
-    }, {
-        "label": "Value",
-        "id": "None/2/None/Value/0/None/2/None/Value"
-    }, {
-        "label": "2",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "2"
-    }, {
-        "label": "Value",
-        "id": "None/2/None/Value/1/None/2/None/Value"
-    }, {
-        "label": "3",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "3"
-    }, {
-        "label": "Value",
-        "id": "None/2/None/Value/2/None/2/None/Value"
-    }]
-    expected_links = [{
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/0/None/Key",
-        "target": "None/0/None/Key/key1",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/0/None",
-        "target": "None/0/None/Key",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/0/None",
-        "target": "None/0/None/Value",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/0/None/Value",
-        "target": "None/0/None/Value/value1",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/1/None/Key",
-        "target": "None/1/None/Key/key2",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/1/None",
-        "target": "None/1/None/Key",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/1/None",
-        "target": "None/1/None/Value",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/1/None/Value",
-        "target": "None/1/None/Value/nested_key",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/1/None/Value/nested_key",
-        "target": "None/1/None/Value/nested_key/nested_value",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/2/None/Key",
-        "target": "None/2/None/Key/key3",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/2/None",
-        "target": "None/2/None/Key",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/2/None",
-        "target": "None/2/None/Value",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/2/None/Value/0/None/2/None/Value",
-        "target": "1",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/2/None/Value/1/None/2/None/Value",
-        "target": "2",
-        "key": 0
-    }, {
-        "arrowhead": "none",
-        "penwidth": "2.0",
-        "source": "None/2/None/Value/2/None/2/None/Value",
-        "target": "3",
-        "key": 0
+    expected_nodes = [
+    {
+      "label": "0",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__0"
+    },
+    {
+      "label": "1",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__1"
+    },
+    {
+      "label": "2",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2"
+    },
+    {
+      "label": "Key",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__0__Key"
+    },
+    {
+      "label": "key1",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__0__Key__key1"
+    },
+    {
+      "label": "Value",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__0__Value"
+    },
+    {
+      "label": "value1",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__0__Value__value1"
+    },
+    {
+      "label": "Key",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__1__Key"
+    },
+    {
+      "label": "key2",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__1__Key__key2"
+    },
+    {
+      "label": "Value",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__1__Value"
+    },
+    {
+      "label": "Key",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2__Key"
+    },
+    {
+      "label": "key3",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2__Key__key3"
+    },
+    {
+      "label": "Value",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2__Value"
+    },
+    {
+      "label": "nested_key",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__1__Value__nested_key"
+    },
+    {
+      "label": "nested_value",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__1__Value__nested_key__nested_value"
+    },
+    {
+      "label": "0",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2__Value__0"
+    },
+    {
+      "label": "1",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2__Value__0__1"
+    },
+    {
+      "label": "1",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2__Value__1"
+    },
+    {
+      "label": "2",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2__Value__1__2"
+    },
+    {
+      "label": "2",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2__Value__2"
+    },
+    {
+      "label": "3",
+      "fontname": "Fira Mono",
+      "fontsize": "10",
+      "margin": "0.3,0.1",
+      "fillcolor": "#fafafa",
+      "shape": "box",
+      "penwidth": 2.0,
+      "style": "rounded",
+      "id": "__2__Value__2__3"
+    }
+  ]
+    expected_links = [
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__0",
+      "target": "__0__Key",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__0",
+      "target": "__0__Value",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__1",
+      "target": "__1__Key",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__1",
+      "target": "__1__Value",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__2",
+      "target": "__2__Key",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__2",
+      "target": "__2__Value",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__0__Key",
+      "target": "__0__Key__key1",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__0__Value",
+      "target": "__0__Value__value1",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__1__Key",
+      "target": "__1__Key__key2",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__1__Value",
+      "target": "__1__Value__nested_key",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__2__Key",
+      "target": "__2__Key__key3",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__2__Value",
+      "target": "__2__Value__0",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__2__Value",
+      "target": "__2__Value__1",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__2__Value",
+      "target": "__2__Value__2",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__1__Value__nested_key",
+      "target": "__1__Value__nested_key__nested_value",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__2__Value__0",
+      "target": "__2__Value__0__1",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__2__Value__1",
+      "target": "__2__Value__1__2",
+      "key": 0
+    },
+    {
+      "arrowhead": "none",
+      "penwidth": "2.0",
+      "source": "__2__Value__2",
+      "target": "__2__Value__2__3",
+      "key": 0
     }]
     # Check that the JSON contains the expected nodes and links
     for node in expected_nodes:
