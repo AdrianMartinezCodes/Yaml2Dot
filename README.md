@@ -24,7 +24,7 @@ person:
 ```
 into this easy to read graph(after rendering using d3-graphviz):
 
-![Nested Yaml](/examples/nested.png)
+![Nested Yaml](/examples/nested.svg)
 
 ## Table of Contents
 
