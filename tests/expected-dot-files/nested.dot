@@ -13,10 +13,8 @@ person__address__city [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, l
 "person__address__city__Another Town" [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label="Another Town", margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
 person__address__zip [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=zip, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
 person__address__zip__54321 [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=54321, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-person__hobbies__0 [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=0, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-person__hobbies__0__reading [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=reading, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-person__hobbies__1 [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=1, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-person__hobbies__1__hiking [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=hiking, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+person__hobbies__reading [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=reading, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+person__hobbies__hiking [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=hiking, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
 person -> person__name  [arrowhead=none, key=0, penwidth="2.0"];
 person -> person__age  [arrowhead=none, key=0, penwidth="2.0"];
 person -> person__address  [arrowhead=none, key=0, penwidth="2.0"];
@@ -26,11 +24,9 @@ person__age -> person__age__28  [arrowhead=none, key=0, penwidth="2.0"];
 person__address -> person__address__street  [arrowhead=none, key=0, penwidth="2.0"];
 person__address -> person__address__city  [arrowhead=none, key=0, penwidth="2.0"];
 person__address -> person__address__zip  [arrowhead=none, key=0, penwidth="2.0"];
-person__hobbies -> person__hobbies__0  [arrowhead=none, key=0, penwidth="2.0"];
-person__hobbies -> person__hobbies__1  [arrowhead=none, key=0, penwidth="2.0"];
+person__hobbies -> person__hobbies__reading  [arrowhead=none, key=0, penwidth="2.0"];
+person__hobbies -> person__hobbies__hiking  [arrowhead=none, key=0, penwidth="2.0"];
 person__address__street -> "person__address__street__456 Elm St"  [arrowhead=none, key=0, penwidth="2.0"];
 person__address__city -> "person__address__city__Another Town"  [arrowhead=none, key=0, penwidth="2.0"];
 person__address__zip -> person__address__zip__54321  [arrowhead=none, key=0, penwidth="2.0"];
-person__hobbies__0 -> person__hobbies__0__reading  [arrowhead=none, key=0, penwidth="2.0"];
-person__hobbies__1 -> person__hobbies__1__hiking  [arrowhead=none, key=0, penwidth="2.0"];
 }

@@ -44,25 +44,30 @@ def process_data_bfs(data: Any, graph: nx.MultiDiGraph, node_attrs: Dict[str, An
         if isinstance(current_data, dict):
             for key, value in current_data.items():
                 child_path = f"{parent_path}{SEPARATOR}{key}" if parent_path else key
-                add_node(graph, child_path, parent_node, node_attrs)
+                if not graph.has_node(child_path):
+                    add_node(graph, child_path, parent_node, node_attrs)
                 
                 # Process the value
                 if isinstance(value, (dict, list)):
                     queue.append((value, child_path, child_path))
                 else:
                     value_path = f"{child_path}{SEPARATOR}{value}"
-                    add_node(graph, value_path, child_path, node_attrs)
+                    if not graph.has_node(value_path):
+                        add_node(graph, value_path, child_path, node_attrs)
 
         elif isinstance(current_data, list):
-            for index, item in enumerate(current_data):
-                item_path = f"{parent_path}{SEPARATOR}{index}"
-                add_node(graph, item_path, parent_node, node_attrs)
+            for item in current_data:
                 if isinstance(item, (dict, list)):
-                    queue.append((item, item_path, item_path))
+                    # Enqueue the item for processing without creating a separate node for the index
+                    item_path = f"{parent_path}{SEPARATOR}{item}"  # Unique path for each item
+                    if not graph.has_node(item_path):
+                        queue.append((item, parent_path, parent_path))
                 else:
-                    # Process simple list items as values
-                    value_path = f"{item_path}{SEPARATOR}{item}"
-                    add_node(graph, value_path, item_path, node_attrs)
+                    # Process simple list items as values directly under the parent
+                    value_path = f"{parent_path}{SEPARATOR}{item}"
+                    if not graph.has_node(value_path):
+                        add_node(graph, value_path, parent_path, node_attrs)
+
 
 
 def rename_nodes_for_rendering(graph: nx.MultiDiGraph) -> None:

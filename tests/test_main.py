@@ -199,39 +199,6 @@ def test_render_yaml_stream(temp_dir, capfd):
     # Check that the JSON contains the expected data from the YAML input
     expected_nodes = [
     {
-      "label": "0",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__0"
-    },
-    {
-      "label": "1",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__1"
-    },
-    {
-      "label": "2",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__2"
-    },
-    {
       "label": "Key",
       "fontname": "Fira Mono",
       "fontsize": "10",
@@ -240,7 +207,11 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__0__Key"
+      "id": "Key"
+    },
+    {
+      "label": "",
+      "id": ""
     },
     {
       "label": "key1",
@@ -251,7 +222,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__0__Key__key1"
+      "id": "Key__key1"
     },
     {
       "label": "Value",
@@ -262,7 +233,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__0__Value"
+      "id": "Value"
     },
     {
       "label": "value1",
@@ -273,18 +244,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__0__Value__value1"
-    },
-    {
-      "label": "Key",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__1__Key"
+      "id": "Value__value1"
     },
     {
       "label": "key2",
@@ -295,29 +255,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__1__Key__key2"
-    },
-    {
-      "label": "Value",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__1__Value"
-    },
-    {
-      "label": "Key",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__2__Key"
+      "id": "Key__key2"
     },
     {
       "label": "key3",
@@ -328,18 +266,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__2__Key__key3"
-    },
-    {
-      "label": "Value",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__2__Value"
+      "id": "Key__key3"
     },
     {
       "label": "nested_key",
@@ -350,7 +277,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__1__Value__nested_key"
+      "id": "Value__nested_key"
     },
     {
       "label": "nested_value",
@@ -361,18 +288,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__1__Value__nested_key__nested_value"
-    },
-    {
-      "label": "0",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__2__Value__0"
+      "id": "Value__nested_key__nested_value"
     },
     {
       "label": "1",
@@ -383,18 +299,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__2__Value__0__1"
-    },
-    {
-      "label": "1",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__2__Value__1"
+      "id": "Value__1"
     },
     {
       "label": "2",
@@ -405,18 +310,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__2__Value__1__2"
-    },
-    {
-      "label": "2",
-      "fontname": "Fira Mono",
-      "fontsize": "10",
-      "margin": "0.3,0.1",
-      "fillcolor": "#fafafa",
-      "shape": "box",
-      "penwidth": 2.0,
-      "style": "rounded",
-      "id": "__2__Value__2"
+      "id": "Value__2"
     },
     {
       "label": "3",
@@ -427,136 +321,89 @@ def test_render_yaml_stream(temp_dir, capfd):
       "shape": "box",
       "penwidth": 2.0,
       "style": "rounded",
-      "id": "__2__Value__2__3"
+      "id": "Value__3"
     }
   ]
+    
     expected_links = [
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__0",
-      "target": "__0__Key",
+      "source": "Key",
+      "target": "Key__key1",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__0",
-      "target": "__0__Value",
+      "source": "Key",
+      "target": "Key__key2",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__1",
-      "target": "__1__Key",
+      "source": "Key",
+      "target": "Key__key3",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__1",
-      "target": "__1__Value",
+      "source": "",
+      "target": "Key",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__2",
-      "target": "__2__Key",
+      "source": "",
+      "target": "Value",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__2",
-      "target": "__2__Value",
+      "source": "Value",
+      "target": "Value__value1",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__0__Key",
-      "target": "__0__Key__key1",
+      "source": "Value",
+      "target": "Value__nested_key",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__0__Value",
-      "target": "__0__Value__value1",
+      "source": "Value",
+      "target": "Value__1",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__1__Key",
-      "target": "__1__Key__key2",
+      "source": "Value",
+      "target": "Value__2",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__1__Value",
-      "target": "__1__Value__nested_key",
+      "source": "Value",
+      "target": "Value__3",
       "key": 0
     },
     {
       "arrowhead": "none",
       "penwidth": "2.0",
-      "source": "__2__Key",
-      "target": "__2__Key__key3",
+      "source": "Value__nested_key",
+      "target": "Value__nested_key__nested_value",
       "key": 0
-    },
-    {
-      "arrowhead": "none",
-      "penwidth": "2.0",
-      "source": "__2__Value",
-      "target": "__2__Value__0",
-      "key": 0
-    },
-    {
-      "arrowhead": "none",
-      "penwidth": "2.0",
-      "source": "__2__Value",
-      "target": "__2__Value__1",
-      "key": 0
-    },
-    {
-      "arrowhead": "none",
-      "penwidth": "2.0",
-      "source": "__2__Value",
-      "target": "__2__Value__2",
-      "key": 0
-    },
-    {
-      "arrowhead": "none",
-      "penwidth": "2.0",
-      "source": "__1__Value__nested_key",
-      "target": "__1__Value__nested_key__nested_value",
-      "key": 0
-    },
-    {
-      "arrowhead": "none",
-      "penwidth": "2.0",
-      "source": "__2__Value__0",
-      "target": "__2__Value__0__1",
-      "key": 0
-    },
-    {
-      "arrowhead": "none",
-      "penwidth": "2.0",
-      "source": "__2__Value__1",
-      "target": "__2__Value__1__2",
-      "key": 0
-    },
-    {
-      "arrowhead": "none",
-      "penwidth": "2.0",
-      "source": "__2__Value__2",
-      "target": "__2__Value__2__3",
-      "key": 0
-    }]
+    }
+  ]
     # Check that the JSON contains the expected nodes and links
     for node in expected_nodes:
         assert node in parsed_json["nodes"]

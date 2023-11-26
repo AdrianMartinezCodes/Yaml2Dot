@@ -1,16 +1,10 @@
 digraph  {
 rankdir=LR;
 fruits [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=fruits, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-fruits__0 [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=0, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-fruits__0__apple [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=apple, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-fruits__1 [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=1, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-fruits__1__banana [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=banana, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-fruits__2 [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=2, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-fruits__2__orange [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=orange, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
-fruits -> fruits__0  [arrowhead=none, key=0, penwidth="2.0"];
-fruits -> fruits__1  [arrowhead=none, key=0, penwidth="2.0"];
-fruits -> fruits__2  [arrowhead=none, key=0, penwidth="2.0"];
-fruits__0 -> fruits__0__apple  [arrowhead=none, key=0, penwidth="2.0"];
-fruits__1 -> fruits__1__banana  [arrowhead=none, key=0, penwidth="2.0"];
-fruits__2 -> fruits__2__orange  [arrowhead=none, key=0, penwidth="2.0"];
+fruits__apple [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=apple, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+fruits__banana [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=banana, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+fruits__orange [fillcolor="#fafafa", fontname="Fira Mono", fontsize=10, label=orange, margin="0.3,0.1", penwidth="2.0", shape=box, style=rounded];
+fruits -> fruits__apple  [arrowhead=none, key=0, penwidth="2.0"];
+fruits -> fruits__banana  [arrowhead=none, key=0, penwidth="2.0"];
+fruits -> fruits__orange  [arrowhead=none, key=0, penwidth="2.0"];
 }
