@@ -420,3 +420,62 @@ def test_render_yaml_stream_invalid_input(temp_dir):
     # Check if the result contains the expected error message
     assert "Error" in result.output
     assert not (temp_dir / "test.json").exists()
+
+
+def test_render_yaml_with_round_robin(temp_dir):
+    # Setup code for input YAML
+    yaml_data = {
+        "key1": "value1",
+        "key2": {
+            "nested_key": "nested_value"
+        },
+        "key3": [1, 2, 3]
+    }
+    yaml_file = temp_dir / "test.yaml"
+    dot_file = temp_dir / "test_round_robin.dot"
+    with open(yaml_file, "w") as f:
+        yaml.dump(yaml_data, f)
+
+    runner = CliRunner()
+    result = runner.invoke(render_yaml, [
+        "--input-file", str(yaml_file), 
+        "--output-file", str(dot_file),
+        "--rankdir", "LR",
+        "--round-robin"
+    ])
+
+    assert dot_file.exists()
+    with open(dot_file, "r") as f:
+      dot_contents = f.read()
+      assert "ellipse" in dot_contents or "box" in dot_contents 
+    
+def test_render_yaml_with_shape(temp_dir):
+    # Setup code for input YAML
+    yaml_data = {
+        "key1": "value1",
+        "key2": {
+            "nested_key": "nested_value"
+        },
+        "key3": [1, 2, 3]
+    }
+    yaml_file = temp_dir / "test.yaml"
+    dot_file = temp_dir / "test_shape.dot"
+    shape = "box"
+
+    with open(yaml_file, "w") as f:
+        yaml.dump(yaml_data, f)
+
+    runner = CliRunner()
+    result = runner.invoke(render_yaml, [
+        "--input-file", str(yaml_file),
+        "--output-file", str(dot_file),
+        "--rankdir", "LR",
+        "--shape", shape
+    ])
+
+    assert dot_file.exists()
+    with open(dot_file, "r") as f:
+      dot_contents = f.read()
+      assert shape in dot_contents
+    
+    
