@@ -75,6 +75,7 @@ def temp_json_file():
     yield file_path
     os.remove(file_path)
 
+
 def test_load_yaml_or_json_valid_json(temp_json_file):
     data = load_yaml_or_json(temp_json_file)
     expected = {'key1': 'value1', 'key2': 'value2'}

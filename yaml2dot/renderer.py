@@ -1,5 +1,5 @@
 from collections import deque
-from typing import Any, Dict, Final, Union, List
+from typing import Any, Dict, Final, List, Union
 
 import networkx as nx
 
@@ -22,27 +22,33 @@ def create_graph(rankdir: str = "LR") -> nx.MultiDiGraph:
     return graph
 
 
-def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str, node_attrs: Dict[str, Any]) -> None:
+def add_node(graph: nx.MultiDiGraph, node_name: str, parent: str,
+             node_attrs: Dict[str, Any]) -> None:
     # Handle empty node names or other specific conditions
     if not node_name.strip():
         # Skip adding the node, or handle it differently based on your requirements
         return
     # Existing code to handle colons in node names
-    if ":" in node_name and not (node_name.startswith('"') and node_name.endswith('"')):
+    if ":" in node_name and not (node_name.startswith('"') and
+                                 node_name.endswith('"')):
         node_name = node_name.replace(":", HANDLE_COLON)
 
     graph.add_node(node_name, label=node_name, **node_attrs)
 
     if parent is not None:
-        if ":" in parent and not (parent.startswith('"') and parent.endswith('"')):
+        if ":" in parent and not (parent.startswith('"') and
+                                  parent.endswith('"')):
             parent = f'"{parent}"'
         graph.add_edge(parent, node_name, arrowhead="none", penwidth="2.0")
 
 
-
-def process_data_bfs(data: Any, graph: nx.MultiDiGraph,
-                     node_attrs: Dict[str, Any], file_num = 0,multi_view=False,first_level=False) -> None:
-    if multi_view: 
+def process_data_bfs(data: Any,
+                     graph: nx.MultiDiGraph,
+                     node_attrs: Dict[str, Any],
+                     file_num=0,
+                     multi_view=False,
+                     first_level=False) -> None:
+    if multi_view:
         node = [(data, "", None)]
     else:
         node = [(data, str(file_num), None)]
@@ -97,7 +103,12 @@ def rename_nodes_for_rendering(graph: nx.MultiDiGraph) -> None:
         graph.nodes[node]['label'] = new_label
 
 
-def render(data: List[Dict[str, Any]], user_node_attrs: Dict[str, Any] = None, rankdir: str = "LR", multi_view=False,round_robin=False,shape = "rounded") -> nx.MultiDiGraph:
+def render(data: List[Dict[str, Any]],
+           user_node_attrs: Dict[str, Any] = None,
+           rankdir: str = "LR",
+           multi_view=False,
+           round_robin=False,
+           shape="rounded") -> nx.MultiDiGraph:
     """
     Renders a list of Python dictionaries (from YAML documents) into a directed graph using NetworkX.
 
@@ -124,12 +135,12 @@ def render(data: List[Dict[str, Any]], user_node_attrs: Dict[str, Any] = None, r
         "style": "rounded",
         "shape": shape
     }
-    data = [data] if not isinstance(data,list) else data
+    data = [data] if not isinstance(data, list) else data
     node_attrs = {**default_node_attrs, **(user_node_attrs or {})}
     if multi_view:
         round_robin = False
 
-    shapes = ["rounded","ellipse"]
+    shapes = ["rounded", "ellipse"]
     for index, document in enumerate(reversed(data)):
         # Select shape in a round-robin fashion from the shapes list
         if round_robin:
@@ -138,7 +149,12 @@ def render(data: List[Dict[str, Any]], user_node_attrs: Dict[str, Any] = None, r
             document_node_attrs = {**node_attrs, "shape": shape}
         else:
             document_node_attrs = node_attrs
-        process_data_bfs(document, graph, document_node_attrs, file_num=index, multi_view=multi_view,first_level=True)
+        process_data_bfs(document,
+                         graph,
+                         document_node_attrs,
+                         file_num=index,
+                         multi_view=multi_view,
+                         first_level=True)
 
     rename_nodes_for_rendering(graph)
     return graph

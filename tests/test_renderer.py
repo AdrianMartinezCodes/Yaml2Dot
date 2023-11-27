@@ -11,15 +11,8 @@ from yaml2dot.renderer import render
 
 
 @pytest.fixture(params=[
-    "complex.yaml",
-    "list.yaml",
-    "mixed.yaml",
-    "nested.yaml",
-    "simple.yaml",
-    "small_graph.yaml",
-    "large_graph.yaml",
-    "list.yaml",
-    "k8-deployment.yaml"
+    "complex.yaml", "list.yaml", "mixed.yaml", "nested.yaml", "simple.yaml",
+    "small_graph.yaml", "large_graph.yaml", "list.yaml", "k8-deployment.yaml"
 ])
 def sample_data_file(request):
     examples_dir = Path(__file__).resolve().parent.parent / "examples"

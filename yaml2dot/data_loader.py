@@ -1,10 +1,12 @@
 import json
-from typing import IO, Any, Optional, Tuple, List
+from typing import IO, Any, List, Optional, Tuple
 
 import yaml
 
 
-def parse_yaml(reader: IO[str]) -> Tuple[Optional[List[dict]], Optional[yaml.YAMLError]]:
+def parse_yaml(
+        reader: IO[str]
+) -> Tuple[Optional[List[dict]], Optional[yaml.YAMLError]]:
     """
     Parse YAML data from a file-like object and return the parsed dictionaries for all documents 
     in the file and any parsing error.
@@ -48,5 +50,7 @@ def load_yaml_or_json(file_path: str) -> Optional[Any]:
         except json.JSONDecodeError as error:
             print(f"Error parsing JSON: {error}")
     else:
-        print("Invalid file format. Supported formats: YAML (.yaml, .yml) and JSON (.json)")
+        print(
+            "Invalid file format. Supported formats: YAML (.yaml, .yml) and JSON (.json)"
+        )
         return None
