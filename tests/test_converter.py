@@ -31,6 +31,7 @@ sample_json_data = {
     }]
 }
 
+
 def test_convert_yaml_to_dot():
     dot_output = convert_yaml_or_json_to_format(sample_yaml_data,
                                                 output_format='dot',
@@ -40,7 +41,6 @@ def test_convert_yaml_to_dot():
     assert dot_output is not None
     assert isinstance(dot_output, str)
     assert "shape=rounded" in dot_output
-
 
 
 def test_convert_yaml_to_json():
@@ -80,13 +80,17 @@ def test_invalid_data():
                                                  output_format='json')
     assert dot_output is None
     assert json_output is None
-    
+
+
 def test_convert_with_custom_node_attrs():
     custom_attrs = {"color": "red", "style": "filled"}
-    dot_output = convert_yaml_or_json_to_format(sample_yaml_data, output_format='dot', user_node_attrs=custom_attrs)
+    dot_output = convert_yaml_or_json_to_format(sample_yaml_data,
+                                                output_format='dot',
+                                                user_node_attrs=custom_attrs)
     assert dot_output is not None
     assert "color=red" in dot_output
     assert "style=filled" in dot_output
+
 
 def test_convert_with_multi_view():
     dot_output = convert_yaml_or_json_to_format(sample_yaml_data,
@@ -94,11 +98,13 @@ def test_convert_with_multi_view():
                                                 multi_view=True)
     assert dot_output is not None
 
+
 def test_convert_with_round_robin():
     dot_output = convert_yaml_or_json_to_format(sample_yaml_data,
                                                 output_format='dot',
                                                 round_robin=True)
     assert dot_output is not None
+
 
 def test_convert_with_specific_shape():
     shape = "box"

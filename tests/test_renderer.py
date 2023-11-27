@@ -39,7 +39,7 @@ def test_render_with_example_files(sample_data_file, expected_dot_file):
     else:
         raise ValueError(f"Unsupported file format: {file_extension}")
     if Path(sample_data_file).stem == "k8-deployment":
-        result = render(data,round_robin=True)
+        result = render(data, round_robin=True)
     else:
         result = render(data)
 

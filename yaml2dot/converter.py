@@ -7,15 +7,13 @@ from networkx.readwrite import json_graph
 from yaml2dot.renderer import render
 
 
-def convert_yaml_or_json_to_format(
-    data: Union[dict, None],
-    user_node_attrs: dict = None,
-    output_format: str = 'dot',
-    rankdir: str = 'LR',
-    multi_view: bool = False,
-    round_robin: bool = False,
-    shape: str = 'rounded'
-) -> Optional[str]:
+def convert_yaml_or_json_to_format(data: Union[dict, None],
+                                   user_node_attrs: dict = None,
+                                   output_format: str = 'dot',
+                                   rankdir: str = 'LR',
+                                   multi_view: bool = False,
+                                   round_robin: bool = False,
+                                   shape: str = 'rounded') -> Optional[str]:
     """
     Convert YAML or JSON data to DOT or JSON format.
 
@@ -34,7 +32,12 @@ def convert_yaml_or_json_to_format(
     if data is None or not isinstance(data, dict):
         return None
 
-    nx_graph = render(data,user_node_attrs=user_node_attrs, rankdir=rankdir, multi_view=multi_view, round_robin=round_robin, shape=shape)
+    nx_graph = render(data,
+                      user_node_attrs=user_node_attrs,
+                      rankdir=rankdir,
+                      multi_view=multi_view,
+                      round_robin=round_robin,
+                      shape=shape)
 
     if output_format == 'dot':
         # Convert the graph to DOT format
