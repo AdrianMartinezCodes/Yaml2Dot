@@ -19,6 +19,7 @@ from yaml2dot.renderer import render
     "small_graph.yaml",
     "large_graph.yaml",
     "list.yaml",
+    "k8-deployment.yaml"
 ])
 def sample_data_file(request):
     examples_dir = Path(__file__).resolve().parent.parent / "examples"
@@ -38,7 +39,7 @@ def test_render_with_example_files(sample_data_file, expected_dot_file):
 
     if file_extension == '.yaml':
         with open(sample_data_file, "r") as data_file:
-            data = yaml.safe_load(data_file)
+            data = list(yaml.safe_load_all(data_file))
     elif file_extension == '.json':
         with open(sample_data_file, "r") as data_file:
             data = json.load(data_file)
