@@ -208,6 +208,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Value"
     },
     {
@@ -222,6 +223,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Key"
     },
     {
@@ -232,6 +234,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Key__key3"
     },
     {
@@ -242,6 +245,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Key__key2"
     },
     {
@@ -252,6 +256,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Key__key1"
     },
     {
@@ -262,6 +267,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Value__value1"
     },
     {
@@ -272,6 +278,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Value__3"
     },
     {
@@ -282,6 +289,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Value__2"
     },
     {
@@ -292,6 +300,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Value__1"
     },
     {
@@ -302,6 +311,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Value__nested_key"
     },
     {
@@ -312,6 +322,7 @@ def test_render_yaml_stream(temp_dir, capfd):
       "fillcolor": "#fafafa",
       "penwidth": 2.0,
       "style": "rounded",
+      "shape": "rounded",
       "id": "0__Value__nested_key__nested_value"
     }
   ]
@@ -447,7 +458,7 @@ def test_render_yaml_with_round_robin(temp_dir):
     assert dot_file.exists()
     with open(dot_file, "r") as f:
       dot_contents = f.read()
-      assert "ellipse" in dot_contents or "box" in dot_contents 
+      assert "rounded" in dot_contents or "box" in dot_contents 
     
 def test_render_yaml_with_shape(temp_dir):
     # Setup code for input YAML
