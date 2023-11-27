@@ -31,7 +31,10 @@ for file_extension in file_extensions:
             with open(data_file, "r") as file:
                 data = list(yaml.safe_load_all(file))
         # Render data as a graph
-        nx_graph = render(data)
+        if data_file.stem == "k8-deployment":
+            nx_graph = render(data,round_robin=True)
+        else:
+            nx_graph = render(data)
 
         # Generate a DOT file from the graph
         dot_filename = data_file.stem + ".dot"
