@@ -38,7 +38,7 @@ def render_yaml(input_file, output_file, rankdir, output_format, multi_view, rou
     if data is None:
         return
 
-    nx_graph = render(data, rankdir=rankdir, multi_view=multi_view, round_robin=round_robin, shape=shape)
+    nx_graph = render(data, rankdir=rankdir, multi_view=multi_view, round_robin=round_robin, shape=str(shape))
 
     if output_file != "-":
         output_path = Path(output_file)
