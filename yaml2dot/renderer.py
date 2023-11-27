@@ -105,7 +105,7 @@ def render(data: List[Dict[str, Any]], user_node_attrs: Dict[str, Any] = None, r
     - data (List[Dict[str, Any]]): The list of Python dictionaries to render, each representing a YAML document.
     - user_node_attrs (Dict[str, Any], optional): User-defined attributes for each node.
     - rankdir (str, optional): The direction of the graph layout. Defaults to "LR" (left to right).
-    - multi_view (bool, optional): Flag to indicate multiple YAML document rendering.
+    - multi_view (bool, optional): Flag to indicate multiple YAML document rendering. Disables round robin style.
     - round_robin (bool,optional): Flag to indicate if the library will assign node shapes automatically
     - shape (str,optional): User specified custom shape for nodes. This option is ignored if round_robin is True.
 
@@ -126,6 +126,8 @@ def render(data: List[Dict[str, Any]], user_node_attrs: Dict[str, Any] = None, r
     }
     data = [data] if not isinstance(data,list) else data
     node_attrs = {**default_node_attrs, **(user_node_attrs or {})}
+    if multi_view:
+        round_robin = False
 
     shapes = ["rounded","ellipse"]
     for index, document in enumerate(reversed(data)):

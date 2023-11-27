@@ -14,7 +14,7 @@ from yaml2dot.renderer import render
 @click.option("--output-file", type=click.Path(), metavar="OUTPUT_FILE", required=True, help="Path to the output file. Use '-' for stdout JSON format.")
 @click.option("--rankdir", type=click.Choice(['LR', 'TB']), default='LR', help="Rank direction (LR for left to right, TB for top to bottom).")
 @click.option("--output-format", type=click.Choice(['dot', 'json', '']), default='dot', help="Output format (DOT or JSON).")
-@click.option("--multi-view", is_flag=True, help="Enable alternative graph view for multiple YAML documents.")
+@click.option("--multi-view", is_flag=True, help="Enable alternative graph view for multiple YAML documents. Disabled round robin.")
 @click.option("--round-robin", is_flag=True, help="Enable Round Robin Node Style. If not, defaults to 'rounded' shape.")
 @click.option("--shape", type=click.STRING, default="rounded", help="User defined node shape. Default='rounded'. See graphviz page: https://graphviz.org/doc/info/shapes.html for support shapes.")
 def render_yaml(input_file, output_file, rankdir, output_format, multi_view, round_robin, shape):
