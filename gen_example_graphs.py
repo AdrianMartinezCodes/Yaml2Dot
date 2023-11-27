@@ -29,8 +29,7 @@ for file_extension in file_extensions:
                 data = json.load(file)
         elif file_extension in [".yaml",".yml"]:
             with open(data_file, "r") as file:
-                data = yaml.safe_load(file)
-
+                data = list(yaml.safe_load_all(file))
         # Render data as a graph
         nx_graph = render(data)
 
