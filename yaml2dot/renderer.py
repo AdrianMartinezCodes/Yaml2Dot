@@ -97,7 +97,7 @@ def rename_nodes_for_rendering(graph: nx.MultiDiGraph) -> None:
         graph.nodes[node]['label'] = new_label
 
 
-def render(data: List[Dict[str, Any]], user_node_attrs: Dict[str, Any] = None, rankdir: str = "LR", multi_view=False,round_robin=True,shape = "rounded") -> nx.MultiDiGraph:
+def render(data: List[Dict[str, Any]], user_node_attrs: Dict[str, Any] = None, rankdir: str = "LR", multi_view=False,round_robin=False,shape = "rounded") -> nx.MultiDiGraph:
     """
     Renders a list of Python dictionaries (from YAML documents) into a directed graph using NetworkX.
 
@@ -121,12 +121,13 @@ def render(data: List[Dict[str, Any]], user_node_attrs: Dict[str, Any] = None, r
         "margin": "0.3,0.1",
         "fillcolor": "#fafafa",
         "penwidth": 2.0,
-        "style": shape
+        "style": "rounded",
+        "shape": shape
     }
     data = [data] if not isinstance(data,list) else data
     node_attrs = {**default_node_attrs, **(user_node_attrs or {})}
 
-    shapes = ["ellipse", "rounded"]
+    shapes = ["rounded","ellipse"]
     for index, document in enumerate(reversed(data)):
         # Select shape in a round-robin fashion from the shapes list
         if round_robin:
