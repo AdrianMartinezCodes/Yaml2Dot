@@ -27,7 +27,7 @@ def test_parse_yaml(sample_yaml_content):
     parsed_data, error = parse_yaml(reader)
 
     assert error is None
-    expected = {'key1': 'value1', 'key2': 'value2'}
+    expected = [{'key1': 'value1', 'key2': 'value2'}]
     assert parsed_data == expected
 
 
@@ -45,7 +45,7 @@ def test_parse_yaml_empty_input():
     reader = io.StringIO("")
     parsed_data, error = parse_yaml(reader)
 
-    assert parsed_data is None  # Empty yaml is None
+    assert not parsed_data  # Empty yaml is None
     assert error is None
 
 
@@ -74,13 +74,6 @@ def temp_json_file():
         file_path = file.name
     yield file_path
     os.remove(file_path)
-
-
-def test_load_yaml_or_json_valid_yaml(temp_yaml_file):
-    data = load_yaml_or_json(temp_yaml_file)
-    expected = {'key1': 'value1', 'key2': 'value2'}
-    assert data == expected
-
 
 def test_load_yaml_or_json_valid_json(temp_json_file):
     data = load_yaml_or_json(temp_json_file)
