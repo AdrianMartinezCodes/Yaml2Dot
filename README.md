@@ -1,6 +1,6 @@
 # Yaml2Dot
 
-Python implementation of a yaml2dot converter. Now with JSON Support!
+Python implementation of a yaml2dot converter. Now with JSON Support and enhcanched node customization!
 
 Check out a demo at my personal page [teamayejay.com/Adrian/Yaml2Dot](https://teamayejay.com/Adrian/Yaml2Dot).
 
@@ -32,6 +32,7 @@ into this easy to read graph(after rendering using d3-graphviz):
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
+  - [CLI OPTIONS](#cli-options)
 - [Examples](#examples)
   - [Sample YAML Files](#sample-yaml-files)
   - [Sample JSON File](#sample-json-file)
@@ -49,7 +50,7 @@ into this easy to read graph(after rendering using d3-graphviz):
 
 Before using the YAML to DOT Converter, ensure you have the following dependencies installed:
 
-- Python 3.10(officially tested, unsure about older versions)
+- Python 3.10(officially tested)
 - [NetworkX](https://networkx.github.io/)
 - [PyDot](https://pypi.org/project/pydot/)
 - [Click](https://click.palletsprojects.com/en/8.0.x/)
@@ -79,12 +80,16 @@ pip install .
 To convert a YAML/JSON file to a DOT file, use the following command:
 
 ```bash
-yaml2dot --input-file INPUT_FILE --output-file OUTPUT_FILE [--rankdir RANKDIR] [--output-format OUTPUT_FORMAT]
+yaml2dot --input-file INPUT_FILE --output-file OUTPUT_FILE [--rankdir RANKDIR] [--output-format OUTPUT_FORMAT] [--multi-view] [--round-robin] [--shape SHAPE]
+
 ```
 
 - INPUT_FILE: Path to the input YAML/JSON file.
 - OUTPUT_FILE: Path to the output DOT file.
 - RANKDIR (optional): Rank direction (LR for left to right, TB for top to bottom). Default is LR.
+- MULTI-VIEW (optional): Enable alternative graph view for multiple YAML documents.
+- ROUND-ROBIN (optional): Enable round-robin node style selection. If not specified, defaults the rounded shape.
+- SHAPE (optional): User-defined node shape, applicable when round-robin is not used. See [Graphviz Shapes](https://graphviz.org/doc/info/shapes.html) for supported shapes.
 
 Example usage for conerting to DOT:
 
@@ -119,34 +124,30 @@ print(dot_output)
 print(json_output)
 ```
 
+
+### CLI Options
+
+The yaml2dot command offers various options to customize the graph rendering:
+
+- `--round-robin`: Automatically assigns different node shapes in a round-robin fashion for each YAML document.
+- `--shape`: Specify a custom shape for nodes. This option is ignored if --round-robin is used.
+- `--multi-view`: Useful for rendering multiple YAML documents in a single file with distinct node styles. Disables round-robin.
+
+
+
 ## Examples
 
-### Sample YAML Files
+### Sample YAML/JSON Files
 
-The `examples` directory contains several sample YAML files that you can use for testing and experimentation. These files cover various YAML structures and complexities.
-
-- complex.yaml: Complex YAML structure with nested dictionaries and lists.
-- list.yaml: YAML data with a list of items.
-- mixed.yaml: YAML data with a mix of dictionaries, lists, and values.
-- nested.yaml: YAML data with nested dictionaries.
-- simple.yaml: Simple YAML data with key-value pairs.
-- small_graph.yaml: A small example YAML data.
-- large_graph.yaml: A larger example YAML data.
-
-### Sample JSON File
-
-The `examples` directory contains an example json file for testing and experimentation.
-
-- sample_json.json: A naively "complex" JSON structure with nested objects and array.
+The `examples` directory contains several sample YAML files that you can use for testing and experimentation. These files cover various YAML structures and complexities. It also contain an example json file for testing and experimentation.
   
-Please feel free to add more or convert the existing yamls into jsons.
 
 ### Rendering Example
 
 To render a sample YAML/JSON file, use the following command:
 
 ```bash
-yaml2dot --input-file examples/small_graph.yaml --output-file small_graph.dot --rankdir LR
+yaml2dot --input-file examples/small_graph.yaml --output-file small_graph.dot --rankdir LR --shape diamond
 ```
 
 This will generate a DOT file that can be visualized using Graphviz or other compatible tools.
@@ -155,10 +156,15 @@ To render to JSON format:
 
 ```bash
 yaml2dot --input-file examples/small_graph.yaml --output-file small_graph.json --rankdir LR --output-format json 
-
 ```
 
 This will generate a node link data JSON file of the networkx graph that can be visualzied using [d3](https://d3js.org/).
+
+For a round-robin node style in multi-document YAMLS:
+
+```bash
+yaml2dot --input-file examples/multi_document.yaml --output-file multi_document.dot --rankdir LR --multi-view --round-robin
+```
 
 ## Development
 

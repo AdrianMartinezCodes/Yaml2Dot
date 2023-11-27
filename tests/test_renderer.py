@@ -11,14 +11,8 @@ from yaml2dot.renderer import render
 
 
 @pytest.fixture(params=[
-    "complex.yaml",
-    "list.yaml",
-    "mixed.yaml",
-    "nested.yaml",
-    "simple.yaml",
-    "small_graph.yaml",
-    "large_graph.yaml",
-    "list.yaml",
+    "complex.yaml", "list.yaml", "mixed.yaml", "nested.yaml", "simple.yaml",
+    "small_graph.yaml", "large_graph.yaml", "list.yaml", "k8-deployment.yaml"
 ])
 def sample_data_file(request):
     examples_dir = Path(__file__).resolve().parent.parent / "examples"
@@ -38,14 +32,16 @@ def test_render_with_example_files(sample_data_file, expected_dot_file):
 
     if file_extension == '.yaml':
         with open(sample_data_file, "r") as data_file:
-            data = yaml.safe_load(data_file)
+            data = list(yaml.safe_load_all(data_file))
     elif file_extension == '.json':
         with open(sample_data_file, "r") as data_file:
             data = json.load(data_file)
     else:
         raise ValueError(f"Unsupported file format: {file_extension}")
-
-    result = render(data)
+    if Path(sample_data_file).stem == "k8-deployment":
+        result = render(data, round_robin=True)
+    else:
+        result = render(data)
 
     # Create a temporary directory for the DOT output
     with tempfile.TemporaryDirectory() as temp_dir:

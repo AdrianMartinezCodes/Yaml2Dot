@@ -200,185 +200,184 @@ def test_render_yaml_stream(temp_dir, capfd):
 
     # Check that the JSON contains the expected data from the YAML input
     expected_nodes = [{
-        "label": "Key",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "Key"
-    }, {
-        "label": "",
-        "id": ""
-    }, {
-        "label": "key1",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "Key__key1"
-    }, {
         "label": "Value",
         "fontname": "Fira Mono",
         "fontsize": "10",
         "margin": "0.3,0.1",
         "fillcolor": "#fafafa",
-        "shape": "box",
         "penwidth": 2.0,
         "style": "rounded",
-        "id": "Value"
+        "shape": "rounded",
+        "id": "0__Value"
     }, {
-        "label": "value1",
+        "label": "0",
+        "id": "0"
+    }, {
+        "label": "Key",
         "fontname": "Fira Mono",
         "fontsize": "10",
         "margin": "0.3,0.1",
         "fillcolor": "#fafafa",
-        "shape": "box",
         "penwidth": 2.0,
         "style": "rounded",
-        "id": "Value__value1"
-    }, {
-        "label": "key2",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "Key__key2"
+        "shape": "rounded",
+        "id": "0__Key"
     }, {
         "label": "key3",
         "fontname": "Fira Mono",
         "fontsize": "10",
         "margin": "0.3,0.1",
         "fillcolor": "#fafafa",
-        "shape": "box",
         "penwidth": 2.0,
         "style": "rounded",
-        "id": "Key__key3"
+        "shape": "rounded",
+        "id": "0__Key__key3"
     }, {
-        "label": "nested_key",
+        "label": "key2",
         "fontname": "Fira Mono",
         "fontsize": "10",
         "margin": "0.3,0.1",
         "fillcolor": "#fafafa",
-        "shape": "box",
         "penwidth": 2.0,
         "style": "rounded",
-        "id": "Value__nested_key"
+        "shape": "rounded",
+        "id": "0__Key__key2"
     }, {
-        "label": "nested_value",
+        "label": "key1",
         "fontname": "Fira Mono",
         "fontsize": "10",
         "margin": "0.3,0.1",
         "fillcolor": "#fafafa",
-        "shape": "box",
         "penwidth": 2.0,
         "style": "rounded",
-        "id": "Value__nested_key__nested_value"
+        "shape": "rounded",
+        "id": "0__Key__key1"
     }, {
-        "label": "1",
+        "label": "value1",
         "fontname": "Fira Mono",
         "fontsize": "10",
         "margin": "0.3,0.1",
         "fillcolor": "#fafafa",
-        "shape": "box",
         "penwidth": 2.0,
         "style": "rounded",
-        "id": "Value__1"
-    }, {
-        "label": "2",
-        "fontname": "Fira Mono",
-        "fontsize": "10",
-        "margin": "0.3,0.1",
-        "fillcolor": "#fafafa",
-        "shape": "box",
-        "penwidth": 2.0,
-        "style": "rounded",
-        "id": "Value__2"
+        "shape": "rounded",
+        "id": "0__Value__value1"
     }, {
         "label": "3",
         "fontname": "Fira Mono",
         "fontsize": "10",
         "margin": "0.3,0.1",
         "fillcolor": "#fafafa",
-        "shape": "box",
         "penwidth": 2.0,
         "style": "rounded",
-        "id": "Value__3"
+        "shape": "rounded",
+        "id": "0__Value__3"
+    }, {
+        "label": "2",
+        "fontname": "Fira Mono",
+        "fontsize": "10",
+        "margin": "0.3,0.1",
+        "fillcolor": "#fafafa",
+        "penwidth": 2.0,
+        "style": "rounded",
+        "shape": "rounded",
+        "id": "0__Value__2"
+    }, {
+        "label": "1",
+        "fontname": "Fira Mono",
+        "fontsize": "10",
+        "margin": "0.3,0.1",
+        "fillcolor": "#fafafa",
+        "penwidth": 2.0,
+        "style": "rounded",
+        "shape": "rounded",
+        "id": "0__Value__1"
+    }, {
+        "label": "nested_key",
+        "fontname": "Fira Mono",
+        "fontsize": "10",
+        "margin": "0.3,0.1",
+        "fillcolor": "#fafafa",
+        "penwidth": 2.0,
+        "style": "rounded",
+        "shape": "rounded",
+        "id": "0__Value__nested_key"
+    }, {
+        "label": "nested_value",
+        "fontname": "Fira Mono",
+        "fontsize": "10",
+        "margin": "0.3,0.1",
+        "fillcolor": "#fafafa",
+        "penwidth": 2.0,
+        "style": "rounded",
+        "shape": "rounded",
+        "id": "0__Value__nested_key__nested_value"
     }]
-
     expected_links = [{
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "Key",
-        "target": "Key__key1",
+        "source": "0__Value",
+        "target": "0__Value__value1",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "Key",
-        "target": "Key__key2",
+        "source": "0__Value",
+        "target": "0__Value__3",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "Key",
-        "target": "Key__key3",
+        "source": "0__Value",
+        "target": "0__Value__2",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "",
-        "target": "Key",
+        "source": "0__Value",
+        "target": "0__Value__1",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "",
-        "target": "Value",
+        "source": "0__Value",
+        "target": "0__Value__nested_key",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "Value",
-        "target": "Value__value1",
+        "source": "0",
+        "target": "0__Value",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "Value",
-        "target": "Value__nested_key",
+        "source": "0",
+        "target": "0__Key",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "Value",
-        "target": "Value__1",
+        "source": "0__Key",
+        "target": "0__Key__key3",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "Value",
-        "target": "Value__2",
+        "source": "0__Key",
+        "target": "0__Key__key2",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "Value",
-        "target": "Value__3",
+        "source": "0__Key",
+        "target": "0__Key__key1",
         "key": 0
     }, {
         "arrowhead": "none",
         "penwidth": "2.0",
-        "source": "Value__nested_key",
-        "target": "Value__nested_key__nested_value",
+        "source": "0__Value__nested_key",
+        "target": "0__Value__nested_key__nested_value",
         "key": 0
     }]
     # Check that the JSON contains the expected nodes and links
@@ -407,3 +406,59 @@ def test_render_yaml_stream_invalid_input(temp_dir):
     # Check if the result contains the expected error message
     assert "Error" in result.output
     assert not (temp_dir / "test.json").exists()
+
+
+def test_render_yaml_with_round_robin(temp_dir):
+    # Setup code for input YAML
+    yaml_data = {
+        "key1": "value1",
+        "key2": {
+            "nested_key": "nested_value"
+        },
+        "key3": [1, 2, 3]
+    }
+    yaml_file = temp_dir / "test.yaml"
+    dot_file = temp_dir / "test_round_robin.dot"
+    with open(yaml_file, "w") as f:
+        yaml.dump(yaml_data, f)
+
+    runner = CliRunner()
+    result = runner.invoke(render_yaml, [
+        "--input-file",
+        str(yaml_file), "--output-file",
+        str(dot_file), "--rankdir", "LR", "--round-robin"
+    ])
+
+    assert dot_file.exists()
+    with open(dot_file, "r") as f:
+        dot_contents = f.read()
+        assert "rounded" in dot_contents or "box" in dot_contents
+
+
+def test_render_yaml_with_shape(temp_dir):
+    # Setup code for input YAML
+    yaml_data = {
+        "key1": "value1",
+        "key2": {
+            "nested_key": "nested_value"
+        },
+        "key3": [1, 2, 3]
+    }
+    yaml_file = temp_dir / "test.yaml"
+    dot_file = temp_dir / "test_shape.dot"
+    shape = "box"
+
+    with open(yaml_file, "w") as f:
+        yaml.dump(yaml_data, f)
+
+    runner = CliRunner()
+    result = runner.invoke(render_yaml, [
+        "--input-file",
+        str(yaml_file), "--output-file",
+        str(dot_file), "--rankdir", "LR", "--shape", shape
+    ])
+
+    assert dot_file.exists()
+    with open(dot_file, "r") as f:
+        dot_contents = f.read()
+        assert shape in dot_contents

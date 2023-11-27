@@ -1,37 +1,39 @@
 import json
-from typing import IO, Any, Optional, Tuple
+from typing import IO, Any, List, Optional, Tuple
 
 import yaml
 
 
 def parse_yaml(
-        reader: IO[str]) -> Tuple[Optional[dict], Optional[yaml.YAMLError]]:
+        reader: IO[str]
+) -> Tuple[Optional[List[dict]], Optional[yaml.YAMLError]]:
     """
-    Parse YAML data from a file-like object and return the parsed dictionary and any parsing error.
+    Parse YAML data from a file-like object and return the parsed dictionaries for all documents 
+    in the file and any parsing error.
 
     Parameters:
     - reader (IO[str]): A file-like object containing YAML data.
 
     Returns:
-    - Tuple[Optional[dict], Optional[yaml.YAMLError]]: A tuple containing the parsed dictionary
-      (or None if there was an error) and any parsing error (or None if parsing was successful).
+    - Tuple[Optional[List[dict]], Optional[yaml.YAMLError]]: A tuple containing a list of parsed 
+      dictionaries (or None if there was an error) and any parsing error (or None if parsing was successful).
     """
     try:
-        parsed_yaml = yaml.safe_load(reader)
+        parsed_yaml = list(yaml.safe_load_all(reader))
         return parsed_yaml, None
     except yaml.YAMLError as error:
         return None, error
 
 
-def load_yaml_or_json(file_path: str) -> Optional[dict]:
+def load_yaml_or_json(file_path: str) -> Optional[Any]:
     """
-    Load YAML or JSON data from a file and return the parsed dictionary.
+    Load YAML or JSON data from a file and return the parsed dictionaries for YAML or dictionary for JSON.
 
     Parameters:
     - file_path (str): The path to the input YAML or JSON file.
 
     Returns:
-    - Optional[dict]: The parsed dictionary or None if there was an error.
+    - Optional[Any]: The parsed data (list of dictionaries for YAML, dictionary for JSON) or None if there was an error.
     """
     file_extension = file_path.lower().split('.')[-1]
 

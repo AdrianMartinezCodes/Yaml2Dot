@@ -29,7 +29,25 @@ from yaml2dot.renderer import render
               type=click.Choice(['dot', 'json', '']),
               default='dot',
               help="Output format (DOT or JSON).")
-def render_yaml(input_file, output_file, rankdir, output_format):
+@click.option(
+    "--multi-view",
+    is_flag=True,
+    help=
+    "Enable alternative graph view for multiple YAML documents. Disables round robin."
+)
+@click.option(
+    "--round-robin",
+    is_flag=True,
+    help="Enable Round Robin Node Style. If not, defaults to 'rounded' shape.")
+@click.option(
+    "--shape",
+    type=click.STRING,
+    default="rounded",
+    help=
+    "User defined node shape. Default='rounded'. See graphviz page: https://graphviz.org/doc/info/shapes.html for support shapes."
+)
+def render_yaml(input_file, output_file, rankdir, output_format, multi_view,
+                round_robin, shape):
     """
     Render YAML or JSON data as a graph and save it as a DOT or JSON file.
 
@@ -38,19 +56,24 @@ def render_yaml(input_file, output_file, rankdir, output_format):
     - output_file (click.Path): The output file where the graph will be saved.
     - rankdir (str): Rank direction for the layout (LR for left to right, TB for top to bottom).
     - output_format (str): Output format (DOT or JSON).
+    - multi_view (bool): Flag to enable alternative graph view for multiple YAML documents.
+    - round_robin (bool): Flag to enable Round Robin Node Style.
+    - shape (str): User defined node shape.
 
     Returns:
     - None
     """
-    # Load the data from the input file using the load_yaml_or_json function
     data = load_yaml_or_json(input_file)
 
     if data is None:
         return
 
-    nx_graph = render(data, rankdir=rankdir)
+    nx_graph = render(data,
+                      rankdir=rankdir,
+                      multi_view=multi_view,
+                      round_robin=round_robin,
+                      shape=str(shape))
 
-    # Create the directory for the output file if it doesn't exist
     if output_file != "-":
         output_path = Path(output_file)
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -60,11 +83,9 @@ def render_yaml(input_file, output_file, rankdir, output_format):
         pydot_graph.write_raw(output_path)
     elif output_format == 'json':
         if output_file == "-":
-            # Return the JSON data as a dictionary (stdout)
             json_data = json_graph.node_link_data(nx_graph)
             click.echo(json.dumps(json_data, indent=2))
         else:
-            # Save the JSON data to a file
             with open(output_path, 'w') as json_file:
                 json_data = json_graph.node_link_data(nx_graph)
                 json.dump(json_data, json_file, indent=2)
