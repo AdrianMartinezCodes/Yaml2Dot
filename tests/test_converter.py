@@ -113,3 +113,7 @@ def test_convert_with_specific_shape():
                                                 shape=shape)
     assert dot_output is not None
     assert "shape=box" in dot_output
+
+def test_read_list_inputs():
+    raw_list = [{'apiVersion': 'v1', 'kind': 'Namespace', 'metadata': {'name': 'example-namespace'}}, {'apiVersion': 'v1', 'kind': 'ConfigMap', 'metadata': {'name': 'example-config', 'namespace': 'example-namespace'}, 'data': {'application.properties': 'property1=value1\nproperty2=value2\n'}}, {'apiVersion': 'apps/v1', 'kind': 'Deployment', 'metadata': {'name': 'example-deployment', 'namespace': 'example-namespace'}, 'spec': {'replicas': 3, 'selector': {'matchLabels': {'app': 'example'}}, 'template': {'metadata': {'labels': {'app': 'example'}}, 'spec': {'containers': [{'name': 'example-container', 'image': 'example-image:latest', 'ports': [{'containerPort': 8080}], 'envFrom': [{'configMapRef': {'name': 'example-config'}}]}]}}}}, {'apiVersion': 'v1', 'kind': 'Service', 'metadata': {'name': 'example-service', 'namespace': 'example-namespace'}, 'spec': {'selector': {'app': 'example'}, 'ports': [{'protocol': 'TCP', 'port': 80, 'targetPort': 8080}], 'type': 'LoadBalancer'}}]
+    assert convert_yaml_or_json_to_format(raw_list)

@@ -29,9 +29,8 @@ def convert_yaml_or_json_to_format(data: Union[dict, None],
     Returns:
     - Optional[str]: The converted data in DOT or JSON format as a string or None if there was an error.
     """
-    if data is None or not isinstance(data, dict):
+    if data is None or (not isinstance(data, dict) and not isinstance(data,list)):
         return None
-
     nx_graph = render(data,
                       user_node_attrs=user_node_attrs,
                       rankdir=rankdir,
